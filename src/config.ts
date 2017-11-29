@@ -1,5 +1,6 @@
 let kafka = {
-  'zookeeper': '172.17.0.2:2181',
+  'zookeeper': 'zookeeper:2181',
+  'kafka': 'kafka:9092',
   'producer': {
     'topic': 'all-devices',
     'partition': -1,

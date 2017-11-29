@@ -6,6 +6,7 @@ import bodyParser = require('body-parser');
 import express = require('express');
 import util = require('util');
 import {AuthRequest, authEnforce, authParse} from './api/authMiddleware';
+import {TopicManager} from './topicManager';
 
 const app = express();
 app.use(authParse);
@@ -27,6 +28,18 @@ app.post('/subscription', function (request: AuthRequest, response: express.Resp
     engine.addSubscription('type', subscription.subject.entities.type, subscription);
   }
   response.send('Ok!');
+});
+
+/*
+ * Topic registry endpoints
+ */
+
+app.get('/topic/:subject', function(req: AuthRequest, response: express.Response) {
+  let topics = new TopicManager(req.service);
+  topics.getCreateTopic(req.params.subject, (error: any, data: any) => {
+    if (error) { console.log('failed to retrieve topic', error); }
+    return response.send('done');
+  })
 });
 
 app.listen(3500, function() {

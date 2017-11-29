@@ -31,8 +31,9 @@ class InvalidTokenError {
 
 export function authParse(req: AuthRequest, res: express.Response, next: express.NextFunction) {
   if (req.header('authorization') === undefined) {
-    next();
+    return next();
   }
+
   const token = req.header('authorization')!.split('.');
   if (token.length != 3) {
     return res.status(401).send(new InvalidTokenError());
