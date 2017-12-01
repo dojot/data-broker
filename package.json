@@ -20,8 +20,10 @@
     "url": "https://github.com/dojot/data-broker/issues"
   },
   "scripts": {
-    "subscription": "node build/subscription-manager.js",
-    "build": "tsc"
+    "subscription": "node build/src/subscription-manager.js",
+    "transpile": "tsc",
+    "copy": "cp -r src/lua build/lua",
+    "build": "npm run-script transpile && npm run-script copy"
   },
   "dependencies": {
     "@types/async": "^2.0.43",
