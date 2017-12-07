@@ -1,12 +1,12 @@
 {
-  "name": "mqtt-kafka-demo",
-  "description": "Example using Kafka MQTT",
-  "version": "0.1.0",
-  "homepage": "https://github.com/giovannicuriel/mqtt-kafka-demo",
+  "name": "data-broker",
+  "description": "Device event broker service for usage with dojot",
+  "version": "0.0.0",
+  "homepage": "https://github.com/dojot/data-broker",
   "keywords": [
     "kafka",
-    "mqtt",
-    "demo"
+    "broker",
+    "subscription"
   ],
   "author": {
     "name": "Giovanni Curiel dos Santos",
@@ -14,16 +14,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/giovannicuriel/mqtt-kafka-demo.git"
+    "url": "git://github.com/dojot/data-broker.git"
   },
   "bugs": {
-    "url": "https://github.com/giovannicuriel/mqtt-kafka-demo/issues"
+    "url": "https://github.com/dojot/data-broker/issues"
   },
   "scripts": {
-    "iotagent": "node build/iotagent-kafka.js",
     "subscription": "node build/subscription-manager.js",
-    "listener": "node build/kafka-listener.js",
-    "test": "echo 1",
     "build": "tsc"
   },
   "dependencies": {
@@ -41,11 +38,12 @@
     "jshint": "^2.9.5",
     "kafka-node": "^2.2.3",
     "mqtt": "^2.13.0",
+    "redis": "^2.8.0",
     "tsconfig": "^7.0.0",
-    "typescript": "^2.5.3",
-    "uuid": "^3.1.0"
+    "typescript": "^2.5.3"
   },
   "devDependencies": {
+    "@types/redis": "^2.8.1",
     "@types/argparse": "^1.0.33"
   }
 }

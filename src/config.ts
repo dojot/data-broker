@@ -6,9 +6,11 @@ let kafka = {
     'key': ''
   },
   'consumer': {
-    'autoCommit': true,
+    'autoCommit' : true,
     'fetchMaxWaitMs' : 1000,
-    'fetchMaxBytes' : 1048576
+    'fetchMaxBytes' : 1048576,
+    'group' : 'subscription-engine',
+    'id' : 'consumer-1'
   },
   'consumerTopics': [
     { 'topic' : 'all-devices', 'partition' : -1}
