@@ -1,4 +1,4 @@
-FROM giovannicuriel/dredd-nodejs
+FROM dojot/dredd-nodejs:8
 
 WORKDIR /opt/subscription-manager
 EXPOSE 80
