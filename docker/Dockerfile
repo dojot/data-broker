@@ -1,6 +1,6 @@
 FROM node:8
 
-WORKDIR /opt/subscription-manager
+WORKDIR /opt/data-broker
 EXPOSE 80
 CMD ["npm", "run", "subscription"]
 

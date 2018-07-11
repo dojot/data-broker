@@ -1,31 +1,31 @@
 /* jslint node: true */
 "use strict";
 
-export interface Status {
+export interface IStatus {
   code: string;
   reasonPhrase: string;
 }
 
-export interface Attribute {
+export interface IAttribute {
   name: string;
   type: string;
   value: string;
 }
 
-export interface ContextElement {
-  attributes: Attribute[];
+export interface IContextElement {
+  attributes: IAttribute[];
   type: string;
   isPattern: string;
   id: string;
 }
 
-export interface ContextResponse {
-  contextElement: ContextElement[];
-  statusCode: Status;
+export interface IContextResponse {
+  contextElement: IContextElement[];
+  statusCode: IStatus;
 }
 
-export interface Event {
+export interface IEvent {
   subscriptionId: string;
   originator: string;
-  contextResponses: ContextResponse[];
+  contextResponses: IContextResponse[];
 }

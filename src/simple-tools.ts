@@ -1,7 +1,6 @@
 /* jshint node: true */
 "use strict";
 
-
 /**
  * Clone a simple object (without any functions)
  * @param {Simple JS object} obj The object to be cloned
@@ -11,8 +10,6 @@ function cloneSimpleObject(obj: any) {
   return JSON.parse(JSON.stringify(obj));
 }
 
-
-
 /**
  * Add an object to an array.
  * If the object is already in the array, nothing is changed.
@@ -21,17 +18,15 @@ function cloneSimpleObject(obj: any) {
  */
 function addUniqueToArray(array: any[], obj: any) {
   let found = false;
-  for (let i in array) {
+  for (const i in array) {
     if (array[i] === obj) {
       found = true;
     }
   }
-  if (found == false) {
+  if (found === false) {
     array.push(obj);
   }
 }
-
-
 
 /**
  * Tokenizes a string
@@ -40,12 +35,12 @@ function addUniqueToArray(array: any[], obj: any) {
  * @return {Array} The tokenized string.
  */
 function tokenize(text: string, token: string) {
-  let ret = [];
+  const ret = [];
   let remainder = text;
 
   let beginIndex = remainder.indexOf(token);
   while (beginIndex >= 0) {
-    let begin = remainder.slice(0, beginIndex);
+    const begin = remainder.slice(0, beginIndex);
     remainder = remainder.slice(beginIndex + token.length);
     ret.push(begin);
     beginIndex = remainder.indexOf(token);
@@ -54,24 +49,23 @@ function tokenize(text: string, token: string) {
   return ret;
 }
 
-
 /**
- * Adds a particular parameter described by a 'path' into an object.
+ * Adds a particular parameter described by a "path" into an object.
  *
  * For instance, suppose the following object:
  * obj = {
  *   descr : {
  *     owner : {
- *       name : 'user'
+ *       name : "user"
  *     }
  *   }
  * }
  *
- * Calling objectify(obj, 'descr.owner.resource.id', 12345) will generate:
+ * Calling objectify(obj, "descr.owner.resource.id", 12345) will generate:
  * {
  *   descr : {
  *     owner : {
- *       name : 'user',
+ *       name : "user",
  *       resource: {
  *         id: 12345
  *       }
@@ -84,20 +78,18 @@ function tokenize(text: string, token: string) {
  * @param {*} value The value to be associated to this path
  */
 function objectify(obj: any, path: string[], value: any) {
-  if (path.length == 1) {
+  if (path.length === 1) {
     obj[path[0]] = value;
   } else {
-    let currAttr = path[0];
+    const currAttr = path[0];
     path.shift();
-    if (obj[currAttr] == undefined) {
+    if (obj[currAttr] === undefined) {
       obj[currAttr] = {};
     }
     obj[currAttr] = objectify(obj[currAttr], path, value);
   }
   return obj;
 }
-
-
 
 /**
  * Remove a prefix from a string.
@@ -108,7 +100,7 @@ function objectify(obj: any, path: string[], value: any) {
  * @return The remainder of the string, without the keywork.
  */
 function trimProperty(property: string, keyword: string) {
-  var payloadLength = keyword.length;
+  const payloadLength = keyword.length;
   return property.slice(property.indexOf(keyword) + payloadLength);
 }
 

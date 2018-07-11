@@ -21,6 +21,7 @@
   },
   "scripts": {
     "subscription": "node build/src/subscription-manager.js",
+    "notification": "node build/ngsi/Subscriber.js",
     "transpile": "tsc",
     "transpile-tests": "tsc -p ./tsconfig-dredd.json",
     "copy": "[ ! -d build/src/lua ] && mkdir -p build/src/lua ; cp -r src/lua/* build/src/lua",
@@ -33,6 +34,8 @@
     "@types/express": "^4.0.37",
     "@types/kafka-node": "^2.0.3",
     "@types/node": "^8.0.31",
+    "@types/uuid": "^3.4.3",
+    "@types/winston": "^2.3.9",
     "async": "^2.5.0",
     "axios": "^0.17.1",
     "body-parser": "^1.18.2",
@@ -45,7 +48,8 @@
     "socket.io": "^2.0.4",
     "tsconfig": "^7.0.0",
     "typescript": "^2.5.3",
-    "uuid": "^3.1.0"
+    "uuid": "^3.1.0",
+    "winston": "^2.4.2"
   },
   "devDependencies": {
     "@types/argparse": "^1.0.33",

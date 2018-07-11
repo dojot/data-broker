@@ -1,7 +1,7 @@
 /* jslint node: true */
 "use strict";
 
-export interface Attr {
+export interface IAttr {
   created?: string;
   id: string;
   label: string;
@@ -10,19 +10,21 @@ export interface Attr {
   value_type: string;
 }
 
-export interface Device {
+export interface IDevice {
   created?: string;
   id: string;
   label: string;
   templates: string[];
-  attrs: {[template_id: string]: Attr[]}
+  attrs: { [templateId: string]: IAttr[] };
 }
 
-export function findAttrValueType(device: Device, attribute: string): string | null {
-  for (let template in device.attrs) {
-    for (let attr of device.attrs[template]) {
-      if (attribute === attr.label) {
-        return attr.value_type;
+export function findAttrValueType(device: IDevice, attribute: string): string | null {
+  for (const template in device.attrs) {
+    if (device.attrs.hasOwnProperty(template)) {
+      for (const attr of device.attrs[template]) {
+        if (attribute === attr.label) {
+          return attr.value_type;
+        }
       }
     }
   }

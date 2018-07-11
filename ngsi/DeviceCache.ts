@@ -1,52 +1,69 @@
 /* jslint node: true */
 "use strict";
 
-import axios, {AxiosResponse, AxiosError} from 'axios';
-import * as device from './deviceManager';
+import axios, { AxiosError, AxiosResponse } from "axios";
+import util = require("util");
+import { logger } from "../src/logger";
+import * as device from "./deviceManager";
+
+type DeviceRequestCallback = (err: any, data: device.IDevice | undefined) => void;
 
 function generateJWT(service: string) {
-  return (new Buffer('dummy jwt schema').toString('base64')) + '.'
-         + (new Buffer(JSON.stringify({'service':service})).toString('base64')) + '.'
-         + (new Buffer('dummy signature').toString('base64'));
-
+  return (new Buffer("dummy jwt schema").toString("base64")) + "."
+         + (new Buffer(JSON.stringify({service})).toString("base64")) + "."
+         + (new Buffer("dummy signature").toString("base64"));
 }
 
-export class DeviceCache {
-  deviceInfo: {[id: string]: device.Device};
-  deviceManager: string;
+class DeviceCache {
+  private deviceInfo: {[id: string]: device.IDevice};
+  private deviceManager: string;
 
+  /**
+   * Constructor
+   * @param deviceManager DeviceManager host
+   */
   constructor(deviceManager: string) {
     this.deviceInfo = {};
     this.deviceManager = deviceManager;
   }
 
-  parseKey(service: string, device_id: string): string {
-    return service + '::' + device_id;
-  }
-
-  requestDeviceInfo(service: string, device_id: string,cb: (err:any, data: device.Device | undefined) => void): void {
-    axios({
-      'url': this.deviceManager + '/device/' + device_id,
-      'method': 'get',
-      'headers': {'authorization': 'Bearer ' + generateJWT(service)}
-    })
-    .then((response: AxiosResponse) => {
-      console.log('got device data', response.data);
-      this.deviceInfo[this.parseKey(service, device_id)] = response.data;
-      cb(null, response.data);
-    })
-    .catch((error: AxiosError) => {
-      cb(error, undefined);
-    })
-  }
-
-  getDeviceInfo(service: string, device_id: string, cb: (err:any, data: device.Device | undefined) => void): void {
-    let data = this.deviceInfo[this.parseKey(service, device_id)];
-    if (data == undefined) {
-      console.log('cache missed');
-      this.requestDeviceInfo(service, device_id, cb);
+  public getDeviceInfo(service: string, deviceId: string, cb: DeviceRequestCallback): void {
+    logger.debug("Got a request for device info...");
+    const data = this.deviceInfo[this.parseKey(service, deviceId)];
+    if (data === undefined) {
+      logger.debug("No data in cache.");
+      this.requestDeviceInfo(service, deviceId, cb);
     } else {
       cb(null, data);
     }
   }
+
+  private requestDeviceInfo(service: string, deviceId: string, cb: DeviceRequestCallback): void {
+    logger.debug("Retrieving device info from DeviceManager...");
+    logger.debug(this.deviceManager);
+    logger.debug(`service: ${service}`);
+    axios({
+      headers: {authorization: "Bearer " + generateJWT(service)},
+      method: "get",
+      url: this.deviceManager + "/device/" + deviceId,
+    })
+    .then((response: AxiosResponse) => {
+      logger.debug("... device info was retrieved.");
+      logger.debug(`Data is: ${util.inspect(response.data, {depth: null})}`);
+      this.deviceInfo[this.parseKey(service, deviceId)] = response.data;
+      cb(null, response.data);
+    })
+    .catch((error: AxiosError) => {
+      logger.debug("... device info was not retrieved.");
+      logger.error(`Error is: ${error}`);
+      cb(error, undefined);
+    });
+    logger.debug("... request for DeviceManager was sent.");
+  }
+
+  private parseKey(service: string, deviceId: string): string {
+    return service + "::" + deviceId;
+  }
 }
+
+export { DeviceCache };
