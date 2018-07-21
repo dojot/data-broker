@@ -5,7 +5,13 @@ import redis = require("redis");
 import config = require("../../src/config");
 // tslint:disable-next-line:no-unused-locals
 hooks.before("Subject > Subject Profiles > Retrieve subject profile", (transaction: any, done: any) => {
-    const client = redis.createClient(6379, config.cache.redis);
+    const cacheUser = config.cache.user;
+    const cachePwd = config.cache.pwd;
+    const cacheHost = `${config.cache.address}:${config.cache.port}`;
+    const cacheDatabase = config.cache.database;
+    const url = `redis://${cacheUser}:${cachePwd}@${cacheHost}/${cacheDatabase}`;
+
+    const client = redis.createClient({ url });
     client.select(1);
     let val: any = {
         replica_assignment: {

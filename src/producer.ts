@@ -1,6 +1,7 @@
 import kafkaDojot = require("@dojot/adminkafka");
 import { logger } from "@dojot/dojot-module-logger";
 import kafka = require("kafka-node");
+import util = require("util");
 import config = require("./config");
 import { IAutoScheme } from "./RedisClientWrapper";
 import { TopicCallback } from "./topicManager";
@@ -20,7 +21,7 @@ class KafkaProducer {
    */
   constructor(host?: string, init?: () => void) {
     logger.debug("Creating new Kafka producer...", {filename: "producer"});
-    const kafkaHost = host ? host : config.kafka.zookeeper;
+    const kafkaHost = host ? host : `${config.kafka.zookeeperAddress}:${config.kafka.zookeeperPort}`;
     logger.debug("Creating Kafka client...", {filename: "producer"});
     const client = new kafka.Client(kafkaHost);
     logger.debug("... Kafka client was created.", {filename: "producer"});
@@ -68,7 +69,7 @@ class KafkaProducer {
         logger.debug("Message transmission succeeded.", {filename: "producer"});
       }
       if (result !== undefined) {
-        logger.debug(`Result is: ${result}`, {filename: "producer"});
+        logger.debug(`Result is: ${util.inspect(result, { depth: null })}`, {filename: "producer"});
       }
     });
     logger.debug("... message transmission was requested.", {filename: "producer"});

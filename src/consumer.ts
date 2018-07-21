@@ -21,7 +21,7 @@ class KafkaConsumer {
   private consumer: kafka.HighLevelConsumer | undefined;
 
   constructor(clientid?: string, host?: string, info?: kafka.ConsumerOptions) {
-    this.host = host ? host : config.kafka.kafkaAddress + ":" + config.kafka.kafkaPort.toString();
+    this.host = host ? host : `${config.kafka.kafkaAddress}:${config.kafka.kafkaPort}`;
     this.info = info ? info : config.kafka.consumer;
     this.id = clientid;
 
