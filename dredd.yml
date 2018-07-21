@@ -31,4 +31,4 @@ hooks-worker-handler-host: 127.0.0.1
 hooks-worker-handler-port: 61321
 config: ./dredd.yml
 blueprint: ./docs/data-broker.apib
-endpoint: 'http://127.0.0.1:80'
+endpoint: 'http://127.0.0.1:18000'

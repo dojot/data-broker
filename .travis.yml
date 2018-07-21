@@ -2,22 +2,24 @@ language: node_js
 node_js: 8
 services:
   - docker
-cache:
-  directories:
-  - node_modules
-before_install:
-  - npm install aglio
+  - redis-server
+install:
+  - npm install
+env:
+  global:
+    - DATABROKER_CACHE_ADDRESS=localhost
+    - DATABROKER_PORT=18000
+    - KAFKA_ADDRESS=localhost
+    - ZOOKEEPER_ADDRESS=localhost
 script:
+  - docker build -t ${TRAVIS_REPO_SLUG} .
+  - docker network create dojot-net
+  - docker run --rm -d  --network dojot-net -p2181:2181 --name zookeeper zookeeper:3.4
+  - docker run --rm -e ZOOKEEPER_IP=zookeeper -e KAFKA_NUM_PARTITIONS=10  --network dojot-net -p9092:9092 --name kafka -d ches/kafka:0.10.1.1
   - npm run-script build
   - npm run-script build-tests
   - npm test
-  - 'docker build -t ${TRAVIS_REPO_SLUG} . -f ./docker/Dockerfile'
-  - 'docker build -t dredd-tests . -f ./tests/Dockerfile'
-  - 'docker-compose -f ./tests/docker-compose.yml up -d kafka data-broker-redis'
-  - 'docker-compose -f ./tests/docker-compose.yml run data-broker'
-install:
-  - npm install
-  - npm install -g codecov
+  - ./tests/start-test.sh
 after_success:
   - codecov
   - travis/publish.sh
