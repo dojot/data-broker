@@ -8,7 +8,7 @@ import { logger } from "./logger";
 
 export interface AssignedScheme {
   replica_assigment: {
-    [partition: string]: Array<number>;
+    [partition: string]: number[];
   };
 }
 
@@ -19,8 +19,6 @@ export interface AutoScheme {
 export interface TopicProfile {
   [name: string]: AssignedScheme | AutoScheme;
 }
-
-
 
 /**
  * Client for REDIS database
@@ -34,16 +32,16 @@ class ClientWrapper {
 
   /**
    * Gets profile configs for a given subject
-   * @param subject 
+   * @param subject
    */
   public getConfig(subject: string): Promise<TopicProfile | undefined> {
     return new Promise<TopicProfile | undefined>((resolve, reject) => {
       this.client.select(1);
       logger.debug(`subject: ${subject}`);
-      let pattern: string = '*:' + subject;
+      const pattern: string = "*:" + subject;
       // let cursor: string = '0';
       let keys: any = [];
-      let configs: TopicProfile = {};
+      const configs: TopicProfile = {};
 
       /**
        * Gets configs given an array of keys
@@ -51,13 +49,14 @@ class ClientWrapper {
        * @param cursor cursor to iterate the keys' array (this isn't the same cursor of scanKeys)
        * @param client redis client
        */
-      function getConfigs(keys: Array<string>, cursor: number, client: redis.RedisClient) {
+      function getConfigs(keys: string[], cursor: number, client: redis.RedisClient) {
         client.select(1);
 
-        let insertConfig = (key: any, err: any, reply: any, ) => {
-          if (err) reject(err);
-          if (key.length > 0)
+        const insertConfig = (key: any, err: any, reply: any ) => {
+          if (err) { reject(err); }
+          if (key.length > 0) {
             configs[key.split(":")[0]] = JSON.parse(reply);
+          }
 
           if (cursor == 0) {
             resolve(configs);
@@ -65,11 +64,11 @@ class ClientWrapper {
           }
           cursor--;
           return getConfigs(keys, cursor, client);
-        }
+        };
 
         client.get(keys[cursor], (err, reply) => {
           insertConfig(keys[cursor], err, reply);
-        })
+        });
       }
       /**
        * Scans all keys that math the pattern *:subject on redis, then, it calls getConfigs to get the value
@@ -78,14 +77,14 @@ class ClientWrapper {
        * @param cursor initial cursor to start scanning in redis
        */
       function scanKeys(client: redis.RedisClient, cursor: string) {
-        client.scan(cursor, 'MATCH', pattern, (err, res) => {
-          if (err) reject(err);
+        client.scan(cursor, "MATCH", pattern, (err, res) => {
+          if (err) { reject(err); }
           cursor = res[0];
           if (res[1].length > 0) {
             keys = keys.concat(res[1]);
           }
-          if (cursor === '0') {
-            if(keys.length === 0){
+          if (cursor === "0") {
+            if (keys.length === 0) {
               resolve();
               return;
             }
@@ -95,13 +94,13 @@ class ClientWrapper {
         });
 
       }
-      scanKeys(this.client, '0');
-    })
+      scanKeys(this.client, "0");
+    });
 
   }
   /**
    * Sets data into redis[1]
-   * 
+   *
    * @param key key 'tenant:subject' to be fetched
    * @param val value of the key
    */

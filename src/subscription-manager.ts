@@ -12,10 +12,9 @@ import morgan = require("morgan");
 import util = require("util");
 import { authEnforce, authParse, IAuthRequest} from "./api/authMiddleware";
 import { logger } from "./logger";
+import { TopicProfile } from "./RedisClientWrapper";
 import {SocketIOSingleton} from "./socketIo";
 import { TopicManagerBuilder } from "./TopicBuilder";
-import { TopicProfile } from "./RedisClientWrapper";
-
 
 // For now, express is not so well supported in TypeScript.
 // A quick workaround, which apparently does not have any side effects is to
@@ -82,21 +81,20 @@ app.get("/topic/:subject/profile", (req: IAuthRequest, response: express.Respons
 
   logger.debug("Received a profile GET request.");
 
-  if(req.service == undefined){
-    response.status(401).send({ error: "Missing mandatory authorization header in profile request"})
+  if (req.service == undefined) {
+    response.status(401).send({ error: "Missing mandatory authorization header in profile request"});
   } else {
     const topics = TopicManagerBuilder.get(req.service);
     topics.getConfigTopics(req.params.subject).then((data: TopicProfile | undefined) => {
-      if (data === undefined){
-        response.status(404).send({"message":"Could not find profiles for this subject"});
+      if (data === undefined) {
+        response.status(404).send({message: "Could not find profiles for this subject"});
       }
       response.status(200).send(data);
     }).catch((error: any) => {
-      response.status(500).send({"message": "error", "details" : `${util.inspect(error, { depth: null})}`});
+      response.status(500).send({message: "error", details : `${util.inspect(error, { depth: null})}`});
     });
   }
-  
-  
+
 });
 
 /**
@@ -104,14 +102,14 @@ app.get("/topic/:subject/profile", (req: IAuthRequest, response: express.Respons
  */
 app.post("/topic/:subject/profile", (req: IAuthRequest, response: express.Response) => {
   logger.debug("Received a profile POST request.");
-  if(req.service == undefined){
-    response.status(401).send({ error: "Missing mandatory authorization header in profile request"})
+  if (req.service == undefined) {
+    response.status(401).send({ error: "Missing mandatory authorization header in profile request"});
   } else {
     const topics = TopicManagerBuilder.get(req.service);
     topics.setConfigTopics(req.params.subject, req.body);
   }
 
-  response.status(200).send({"message": "Set configs successfully"});
+  response.status(200).send({message: "Set configs successfully"});
 });
 
 /**
@@ -120,17 +118,16 @@ app.post("/topic/:subject/profile", (req: IAuthRequest, response: express.Respon
 app.put("/topic/:subject/profile/:tenant", (req: IAuthRequest, response: express.Response) => {
   logger.debug(`Received a profile PUT request for tenant ${req.params.tenant}` );
 
-  if(req.service == undefined){
-    response.status(401).send({ error: "Missing mandatory authorization header in profile request"})
+  if (req.service == undefined) {
+    response.status(401).send({ error: "Missing mandatory authorization header in profile request"});
   } else {
     const topics = TopicManagerBuilder.get(req.service);
     topics.setConfigTopics(req.params.subject, req.body);
   }
 
-  response.status(200).send({"message": "Configs edited/created successfully"});
-  
-});
+  response.status(200).send({message: "Configs edited/created successfully"});
 
+});
 
 /**
  * SocketIO endpoint

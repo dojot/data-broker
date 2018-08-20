@@ -9,7 +9,6 @@ import { QueuedTopic } from "./QueuedTopic";
 import { ClientWrapper } from "./RedisClientWrapper";
 import { RedisManager } from "./redisManager";
 
-
 type TopicCallback = (error?: any, topic?: string) => void;
 
 // TODO this should also handle kafka ACL configuration
@@ -46,23 +45,22 @@ class TopicManager {
 
   public setConfigTopics(subject: string, body: any) {
     try {
-      let configs: any = body;
+      const configs: any = body;
       let ten: any;
       for (ten in configs) {
-        let key: string = ten + ":" + subject;
-        let val: string = JSON.stringify(configs[ten]);
+        const key: string = ten + ":" + subject;
+        const val: string = JSON.stringify(configs[ten]);
         this.redis.setConfig(key, val);
       }
     } catch (error) {
-      logger.debug('Profiles could not be config')
+      logger.debug("Profiles could not be config");
     }
   }
 
-  public editConfigTopics(subject: string, tenant: string, body: any){
-      let key: string = tenant + ":" + subject;
+  public editConfigTopics(subject: string, tenant: string, body: any) {
+      const key: string = tenant + ":" + subject;
       this.redis.setConfig(key, JSON.stringify(body[tenant]));
   }
-
 
   public getCreateTopic(subject: string, callback: TopicCallback | undefined): void {
     logger.debug("Retrieving/creating new topic...");
@@ -115,7 +113,6 @@ class TopicManager {
     this.assertTopic(subject, "a valid subject must be provided");
     return "ti:" + this.service + ":" + subject;
   }
-
 
   private handleRequest(request: QueuedTopic) {
     this.producer.createTopics([request.topic], () => {
