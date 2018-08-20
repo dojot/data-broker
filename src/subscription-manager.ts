@@ -12,6 +12,7 @@ import morgan = require("morgan");
 import util = require("util");
 import { authEnforce, authParse, IAuthRequest} from "./api/authMiddleware";
 import { logger } from "./logger";
+import { TopicProfile } from "./RedisClientWrapper";
 import {SocketIOSingleton} from "./socketIo";
 import { TopicManagerBuilder } from "./TopicBuilder";
 
@@ -54,6 +55,7 @@ app.post("/subscription", (request: IAuthRequest, response: express.Response) =>
  */
 app.get("/topic/:subject", (req: IAuthRequest, response: express.Response) => {
   logger.debug("Received a topic GET request.");
+
   if (req.service === undefined) {
     logger.error("Service is not defined in GET request headers.");
     response.status(401);
@@ -71,6 +73,60 @@ app.get("/topic/:subject", (req: IAuthRequest, response: express.Response) => {
       }
     });
   }
+});
+/**
+ * Getting profiles end point
+ */
+app.get("/topic/:subject/profile", (req: IAuthRequest, response: express.Response) => {
+
+  logger.debug("Received a profile GET request.");
+
+  if (req.service == undefined) {
+    response.status(401).send({ error: "Missing mandatory authorization header in profile request"});
+  } else {
+    const topics = TopicManagerBuilder.get(req.service);
+    topics.getConfigTopics(req.params.subject).then((data: TopicProfile | undefined) => {
+      if (data === undefined) {
+        response.status(404).send({message: "Could not find profiles for this subject"});
+      }
+      response.status(200).send(data);
+    }).catch((error: any) => {
+      response.status(500).send({message: "error", details : `${util.inspect(error, { depth: null})}`});
+    });
+  }
+
+});
+
+/**
+ * Setting profiles end point
+ */
+app.post("/topic/:subject/profile", (req: IAuthRequest, response: express.Response) => {
+  logger.debug("Received a profile POST request.");
+  if (req.service == undefined) {
+    response.status(401).send({ error: "Missing mandatory authorization header in profile request"});
+  } else {
+    const topics = TopicManagerBuilder.get(req.service);
+    topics.setConfigTopics(req.params.subject, req.body);
+  }
+
+  response.status(200).send({message: "Set configs successfully"});
+});
+
+/**
+ * Editing profiles end point
+ */
+app.put("/topic/:subject/profile/:tenant", (req: IAuthRequest, response: express.Response) => {
+  logger.debug(`Received a profile PUT request for tenant ${req.params.tenant}` );
+
+  if (req.service == undefined) {
+    response.status(401).send({ error: "Missing mandatory authorization header in profile request"});
+  } else {
+    const topics = TopicManagerBuilder.get(req.service);
+    topics.setConfigTopics(req.params.subject, req.body);
+  }
+
+  response.status(200).send({message: "Configs edited/created successfully"});
+
 });
 
 /**

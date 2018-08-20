@@ -20,6 +20,145 @@ data-broker point of view, all `subjects` are equal and are just a representatio
 to be put on their own stream. To check the list of available subjects to consume from (as an
 application) please check the relevant service documentation (e.g. *device-manager* or *iotagent*).
 
+## Subject Profiles [/topic/{subjectid}/profile]
+
+Subject profiles are used to define how topics will be created when requesting
+one for a particular subject. For instance, let's say that current deploy must
+prioritize data sent by devices (received, processed and published by IoT
+agents). In order to do this, the system administrator might want to create a
+profile to `device-data` subject, which is the one used by IoT agent, adding
+more partitions to it. Therefore, whenever a new IoT agent requests a topic to
+DataBroker, it will create a new topic (if it doesn't exist already) this new
+configuration. The administrator can set different profiles to different
+tenants associated to the same subject.
+
+There are two ways to configure a subject profile:
+
+ 1) Setting a default value for number of partitions and replication factor.
+ Using this scheme will distribute all partitions evenly to all Kafka brokers
+ in the cluster. The message format is as follows:
+    ```json
+    {
+        "num_partitions": 4,
+        "replication_factor" : 2
+    }
+    ```
+ This message indicates that the topic will have 4 partitions and each one will
+ have two replicas.
+
+ 2) Setting a mapping of partitions and brokers: this scheme allows an
+ administrator to set the broker which will host a particular partitions (first
+ element is the preferred partition leader) and its replicas. The message
+ format is as follows:
+    ```json
+    {
+        "replica_assignment": {
+            "1": [ 1, 2, 3],
+            "2": [ 4, 5, 6]
+        }
+    }
+    ```
+ This message indicates that the topic will have 2 partitions. The first
+ partition will be hosted by brokers 1 (preferred partition leader), 2 and 3
+ and the second one will be hosted by brokers 4 (preferred partition leader), 5
+ and 6.
+
+ This mapping will be used as a suggestion to Kafka brokers. As noted in its
+ documentation, it is not guaranteed that this mapping will be exactly the
+ configured scenario.
+
+The schemes are mutually exclusive. Also, these APIs are accessible only by
+users in `admin` tenant (only system administrator can use them).
+
+Default values are one partition per topic, no replication.
+
++ Parameters
+
+    + subjectid: devicedata (required, string) - Subject whose topic is to be retrieved.
+
+
+### Retrieve subject profile [GET]
++ Request
+    + Headers
+
+            Authorization: Bearer JWT
+
++ Response 200 (application/json; charset=utf-8)
+
+            {
+                "special-user": {
+                    "replica_assignment": {
+                        "1": [ 1, 2, 3],
+                        "2": [ 4, 5, 6]
+                    }
+                },
+                "*": {
+                    "num_partitions": 2,
+                    "replication_factor" : 1
+                }
+            }
+
+### Create a new subject profile [POST]
++ Request
+    + Headers
+
+            Authorization: Bearer JWT
+
+    + Body
+
+            { 
+                "special-user":
+                 { 
+                     "replica_assignment": 
+                     { 
+                         "1": [ 1, 2, 3], 
+                         "2": [ 4, 5, 6] 
+                         } 
+                }, 
+                "*": 
+                { 
+                    "num_partitions": 2,
+                     "replication_factor" : 1
+                }  
+            }
+
++ Response 200 (application/json; charset=utf-8)
+
+            {"message": "Set configs successfully"}
+
+### Edit Profile [/topic/{subjectid}/profile/{tenant}]
+
++ Parameters
+    + subjectid: devicedata (required, string) - Subject whose profiles is to be retrieved.
+    + tenant: special-user (required, string) - Tenant that will have configs changed or created
+
+### Edit profile config for given tenant [PUT]
+
++ Request
+    + Headers
+
+            Authorization: Bearer JWT
+
+    + Body
+
+            { 
+                "special-user":
+                 { 
+                     "replica_assignment": 
+                     { 
+                         "1": [ 1, 2, 3], 
+                         "2": [ 4, 5, 6],
+                         "3": [ 7, 8, 9] 
+                         } 
+                }  
+            }
++ Response 200 (application/json; charset=utf-8)
+
+            {"message": "PUT request successful"}
+
+
+
+
 ## Subject [/topic/{subjectid}]
 
 + Parameters
@@ -95,4 +234,4 @@ Request a one-time token for connection establishment.
 
 + Response 200 (application/json; charset=utf-8)
 
-            {"token":"f3fa3200-355e-4c64-b300-64cef69b0576"}
+{"token":"f3fa3200-355e-4c64-b300-64cef69b0576"}

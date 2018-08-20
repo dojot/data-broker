@@ -2,7 +2,7 @@
 "use strict";
 
 import uuid = require("uuid/v4");
-import {broker as config} from "./config";
+import { broker as config } from "./config";
 import { logger } from "./logger";
 import { KafkaProducer } from "./producer";
 import { QueuedTopic } from "./QueuedTopic";
@@ -39,6 +39,28 @@ class TopicManager {
       }
     });
   }
+  public getConfigTopics(subject: string): Promise<any> {
+    return this.redis.getConfig(subject);
+  }
+
+  public setConfigTopics(subject: string, body: any) {
+    try {
+      const configs: any = body;
+      let ten: any;
+      for (ten in configs) {
+        const key: string = ten + ":" + subject;
+        const val: string = JSON.stringify(configs[ten]);
+        this.redis.setConfig(key, val);
+      }
+    } catch (error) {
+      logger.debug("Profiles could not be config");
+    }
+  }
+
+  public editConfigTopics(subject: string, tenant: string, body: any) {
+      const key: string = tenant + ":" + subject;
+      this.redis.setConfig(key, JSON.stringify(body[tenant]));
+  }
 
   public getCreateTopic(subject: string, callback: TopicCallback | undefined): void {
     logger.debug("Retrieving/creating new topic...");
@@ -54,7 +76,7 @@ class TopicManager {
         }
 
         logger.debug("... topic was properly created/retrievied.");
-        const request = {topic, subject, callback};
+        const request = { topic, subject, callback };
         if (this.producerReady) {
           logger.debug("Handling all pending requests...");
           this.handleRequest(request);
