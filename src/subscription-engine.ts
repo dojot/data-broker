@@ -246,10 +246,8 @@ class SubscriptionEngine {
   }
   public addIngestionChannel(topic: string[]) {
     const kafkaTopics: kafka.Topic[] = [];
-    for (const i in topic) {
-      if (topic.hasOwnProperty(i)) {
+    for (const i of topic) {
         kafkaTopics.push({topic: i});
-      }
     }
     this.subscriber.subscribe(kafkaTopics, this.handleEvent);
   }
