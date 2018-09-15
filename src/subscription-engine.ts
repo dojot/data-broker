@@ -233,7 +233,7 @@ class SubscriptionEngine {
     let data: string;
     logger.debug("New data arrived!", {filename: "sub-eng"});
     try {
-      data = JSON.parse(message.value);
+      data = JSON.parse(message.value.toString());
       logger.debug(`Data: ${util.inspect(data, {depth: null})}`, {filename: "sub-eng"});
       this.processEvent(new Event(data));
     } catch (err) {
@@ -246,10 +246,8 @@ class SubscriptionEngine {
   }
   public addIngestionChannel(topic: string[]) {
     const kafkaTopics: kafka.Topic[] = [];
-    for (const i in topic) {
-      if (topic.hasOwnProperty(i)) {
+    for (const i of topic) {
         kafkaTopics.push({topic: i});
-      }
     }
     this.subscriber.subscribe(kafkaTopics, this.handleEvent);
   }

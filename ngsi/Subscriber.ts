@@ -45,7 +45,7 @@ if (args.version === "v1") {
 
 function handleMessage(data: kafka.Message) {
 
-  const event = JSON.parse(data.value);
+  const event = JSON.parse(data.value.toString());
   const meta = event.metadata;
   cache.getDeviceInfo(meta.service, meta.deviceid, (err: any, deviceInfo: device.IDevice | undefined) => {
     if (err || (deviceInfo === undefined)) {

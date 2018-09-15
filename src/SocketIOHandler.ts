@@ -118,7 +118,7 @@ class SocketIOHandler {
     let data: any;
     logger.debug("Trying to parse received message payload...", {filename: "SocketIOHandler"});
     try {
-      data = JSON.parse(message.value);
+      data = JSON.parse(message.value.toString());
     } catch (err) {
       if (err instanceof TypeError) {
         logger.debug("... message payload was not successfully parsed.", {filename: "SocketIOHandler"});
