@@ -1,7 +1,7 @@
 /* jslint node: true */
 "use strict";
 
-import { logger } from "@dojot/dojot-module";
+import { logger } from "@dojot/dojot-module-logger";
 import {ArgumentParser} from "argparse";
 import axios from "axios";
 import kafka = require("kafka-node");

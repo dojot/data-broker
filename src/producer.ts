@@ -1,7 +1,7 @@
 import kafkaDojot = require("@dojot/adminkafka");
+import { logger } from "@dojot/dojot-module-logger";
 import kafka = require("kafka-node");
 import config = require("./config");
-import { logger } from "@dojot/dojot-module";
 import { IAutoScheme } from "./RedisClientWrapper";
 import { TopicCallback } from "./topicManager";
 

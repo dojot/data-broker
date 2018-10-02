@@ -1,7 +1,7 @@
 /* jslint node: true */
 "use strict";
 
-import { logger } from "@dojot/dojot-module";
+import { logger } from "@dojot/dojot-module-logger";
 import uuid = require("uuid/v4");
 import { KafkaProducer } from "./producer";
 import { QueuedTopic } from "./QueuedTopic";

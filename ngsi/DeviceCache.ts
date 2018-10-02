@@ -1,7 +1,7 @@
 /* jslint node: true */
 "use strict";
 
-import { logger } from "@dojot/dojot-module";
+import { logger } from "@dojot/dojot-module-logger";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import util = require("util");
 import * as device from "./deviceManager";
