@@ -1,7 +1,7 @@
 /* jslint node: true */
 "use strict";
 
-import { logger } from "@dojot/dojot-module";
+import { logger } from "@dojot/dojot-module-logger";
 import crypto = require("crypto");
 import fs = require("fs");
 import redis = require("redis");

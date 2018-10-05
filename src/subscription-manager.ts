@@ -3,7 +3,7 @@
 
 // import engine = require("./subscription-engine");
 
-import { logger, loggerRoute   } from "@dojot/dojot-module";
+import { addLoggerEndpoint, logger } from "@dojot/dojot-module-logger";
 import bodyParser = require("body-parser");
 import express = require("express");
 import http = require("http");
@@ -35,7 +35,7 @@ SocketIOSingleton.getInstance(httpServer);
 /*
  *setting log debug route to app
  */
-loggerRoute(app, "subscription-manager");
+addLoggerEndpoint(app);
 
 /*
  * Subscription management endpoints

@@ -1,7 +1,7 @@
 /* jslint node: true */
 "use strict";
 
-import { logger } from "@dojot/dojot-module";
+import { logger } from "@dojot/dojot-module-logger";
 import express = require("express");
 import { InvalidTokenError } from "./InvalidTokenError";
 import { UnauthorizedError } from "./UnauthorizedError";

@@ -1,12 +1,11 @@
 /* jslint node: true */
 "use strict";
 
-import { logger } from "@dojot/dojot-module";
-import kafka = require("kafka-node");
+import { Messenger } from "@dojot/dojot-module";
+import { logger } from "@dojot/dojot-module-logger";
 import sio = require("socket.io");
 import uuid = require("uuid/v4");
-import {KafkaConsumer} from "./consumer";
-import {RedisManager} from "./redisManager";
+import { RedisManager } from "./redisManager";
 import { TopicManagerBuilder } from "./TopicBuilder";
 
 function getKey(token: string): string {
@@ -18,7 +17,7 @@ function getKey(token: string): string {
  */
 class SocketIOHandler {
   private ioServer: SocketIO.Server;
-  private consumers: { [key: string]: KafkaConsumer };
+  private messenger: Messenger;
 
   /**
    * Constructor.
@@ -27,8 +26,6 @@ class SocketIOHandler {
   constructor(httpServer: any) {
     logger.debug("Creating new SocketIO handler...", {filename: "SocketIOHandler"});
 
-    this.consumers = {};
-
     logger.debug("Creating sio server...", {filename: "SocketIOHandler"});
     this.ioServer = sio(httpServer);
     logger.debug("... sio server was created.", {filename: "SocketIOHandler"});
@@ -36,6 +33,14 @@ class SocketIOHandler {
     this.ioServer.use(this.checkSocket);
 
     logger.debug("Registering SocketIO server callbacks...", {filename: "SocketIOHandler"});
+
+    this.messenger = new Messenger("data-broker-socketio");
+    this.messenger.init();
+    this.messenger.on("device-data", "message", (tenant: string, data: any) => {
+      logger.debug(`Handling message for tenant ${tenant}`);
+      this.handleMessage(tenant, data);
+    });
+
     this.ioServer.on("connection", (socket) => {
       logger.debug("Got new SocketIO connection.", {filename: "SocketIOHandler"});
       const redis = RedisManager.getClient();
@@ -86,7 +91,6 @@ class SocketIOHandler {
             }`, {filename: "SocketIOHandler"});
           return;
         }
-        this.subscribeTopic(topic, tenant);
       });
     logger.debug("... Kafka topic creation/retrieval was requested.", {filename: "SocketIOHandler"});
 
@@ -106,26 +110,20 @@ class SocketIOHandler {
    * @param error Error received from Kafka library.
    * @param message The message received from Kafka Library
    */
-  private handleMessage(nsp: string, error?: any, message?: kafka.Message) {
+  private handleMessage(nsp: string, message: string) {
     logger.debug("Processing message just received...", {filename: "SocketIOHandler"});
-    if (error || message === undefined) {
-      logger.error("Invalid event received. Ignoring.", {filename: "SocketIOHandler"});
-      logger.error(`Error is ${error}`, {filename: "SocketIOHandler"});
-      logger.error(`Message is ${message}`, {filename: "SocketIOHandler"});
-      return;
-    }
 
     let data: any;
     logger.debug("Trying to parse received message payload...", {filename: "SocketIOHandler"});
     try {
-      data = JSON.parse(message.value);
+      data = JSON.parse(message);
     } catch (err) {
       if (err instanceof TypeError) {
         logger.debug("... message payload was not successfully parsed.", {filename: "SocketIOHandler"});
-        logger.error(`Received data is not a valid event: ${message.value}`, {filename: "SocketIOHandler"});
+        logger.error(`Received data is not a valid event: ${message}`, {filename: "SocketIOHandler"});
       } else if (err instanceof SyntaxError) {
         logger.debug("... message payload was not successfully parsed.", {filename: "SocketIOHandler"});
-        logger.error(`Failed to parse event as JSON: ${message.value}`, {filename: "SocketIOHandler"});
+        logger.error(`Failed to parse event as JSON: ${message}`, {filename: "SocketIOHandler"});
       }
       return;
     }
@@ -143,36 +141,11 @@ class SocketIOHandler {
       return;
     }
 
-    logger.debug(`Will publish event to namespace ${nsp}: ${message.value}`, {filename: "SocketIOHandler"});
+    logger.debug(`Will publish event to namespace ${nsp} from device ${data.metadata.deviceid}`,
+      {filename: "SocketIOHandler"});
     this.ioServer.to(nsp).emit(data.metadata.deviceid, data);
     this.ioServer.to(nsp).emit("all", data);
     logger.debug("... received message was successfully processed.", {filename: "SocketIOHandler"});
-  }
-
-  /**
-   * Subscribe to a particular topic in Kafka.
-   * @param topic The topic to be subscribed
-   * @param tenant The tenant related to the topic being subscribed.
-   * @returns A new KafkaConsumer
-   */
-  private subscribeTopic(topic: string, tenant: string): KafkaConsumer {
-    logger.debug(`Subscribing to topic ${topic}...`, {filename: "SocketIOHandler"});
-    if (this.consumers.hasOwnProperty(topic)) {
-      logger.debug("Topic already had a subscription. Returning it.", {filename: "SocketIOHandler"});
-      return this.consumers[topic];
-    }
-
-    logger.debug(`Will subscribe to topic: ${topic}`, {filename: "SocketIOHandler"});
-    const subscriber = new KafkaConsumer();
-    this.consumers[topic] = subscriber;
-    subscriber.subscribe(
-      [{ topic }],
-      (error?: any, message?: kafka.Message) => {
-        this.handleMessage(tenant, error, message);
-      });
-
-    logger.debug("... topic was successfully subscribed.", {filename: "SocketIOHandler"});
-    return subscriber;
   }
 
   /**

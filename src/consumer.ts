@@ -1,4 +1,4 @@
-import { logger } from "@dojot/dojot-module";
+import { logger } from "@dojot/dojot-module-logger";
 import kafka = require("kafka-node");
 import util = require("util");
 import uuid = require("uuid/v4");

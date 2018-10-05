@@ -234,4 +234,40 @@ Request a one-time token for connection establishment.
 
 + Response 200 (application/json; charset=utf-8)
 
-{"token":"f3fa3200-355e-4c64-b300-64cef69b0576"}
+            {"token":"f3fa3200-355e-4c64-b300-64cef69b0576"}
+
+
+# Group Log configuration
+
+Retrieve/request log level changes
+
+## Log level configuration [log/config]
+
+### Retrieve current log level [GET] 
+
++ Request
+  + Headers
+
+            Authorization: Bearer JWT
+
++ Response 200 (application/json; charset=utf-8)
+
+            {"level":"debug"}
+
+### Set current log level [PUT]
+
++ Request
+    + Headers
+
+            Authorization: Bearer JWT
+
+    + Body
+
+            { 
+                "level": "warn"
+            }
++ Response 200 (text/html; charset=utf-8)
+
+            "Level of debugger is set to warn"
+
+
