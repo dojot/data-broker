@@ -2,7 +2,7 @@ FROM node:8.14.0-alpine as basis
 
 WORKDIR /opt/data-broker
 
-RUN apk add git python make bash gcc g++
+RUN apk add git python make bash gcc g++ --no-cache
 
 COPY package.json .
 COPY package-lock.json .
