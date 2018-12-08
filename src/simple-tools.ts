@@ -18,8 +18,8 @@ function cloneSimpleObject(obj: any) {
  */
 function addUniqueToArray(array: any[], obj: any) {
   let found = false;
-  for (const i in array) {
-    if (array[i] === obj) {
+  for (const item of array) {
+    if (item === obj) {
       found = true;
     }
   }
