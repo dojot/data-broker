@@ -1,6 +1,6 @@
 init: true
 dry-run: null
-hookfiles: ./build/tests/dredd-hooks/*hook.js
+hookfiles: ./tests/build/tests/dredd-hooks/*hook.js
 language: nodejs
 sandbox: false
 server: npm run subscription

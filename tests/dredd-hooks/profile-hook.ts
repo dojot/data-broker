@@ -3,6 +3,7 @@
 import hooks = require("hooks");
 import redis = require("redis");
 import config = require("../../src/config");
+// tslint:disable-next-line:no-unused-locals
 hooks.before("Subject > Subject Profiles > Retrieve subject profile", (transaction: any, done: any) => {
     const client = redis.createClient(6379, config.cache.redis);
     client.select(1);

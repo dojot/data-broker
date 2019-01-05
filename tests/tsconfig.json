@@ -55,8 +55,8 @@
     "node_modules"
   ],
   "include": [
-    "src",
-    "ngsi",
-    "tests"
+    "../src",
+    "../ngsi",
+    "."
   ]
 }
