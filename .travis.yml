@@ -9,12 +9,16 @@ before_install:
   - npm install aglio
 script:
   - npm run-script build
+  - npm run-script build-tests
+  - npm test
   - 'docker build -t ${TRAVIS_REPO_SLUG} . -f ./docker/Dockerfile'
   - 'docker build -t dredd-tests . -f ./tests/Dockerfile'
   - 'docker-compose -f ./tests/docker-compose.yml up -d kafka data-broker-redis'
   - 'docker-compose -f ./tests/docker-compose.yml run data-broker'
 install:
   - npm install
+  - npm install -g codecov
 after_success:
+  - codecov
   - travis/publish.sh
   - travis/deploy-gh-pages.sh
