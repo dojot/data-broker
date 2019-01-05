@@ -53,7 +53,10 @@ class ClientWrapper {
         client.select(1);
 
         const insertConfig = (key: any, err: any, reply: any) => {
-          if (err) { reject(err); }
+          if (err) {
+            reject(err);
+            return;
+          }
           if (key.length > 0) {
             configs[key.split(":")[0]] = JSON.parse(reply);
           }
@@ -78,7 +81,10 @@ class ClientWrapper {
        */
       function scanKeys(client: redis.RedisClient, cursor: string) {
         client.scan(cursor, "MATCH", pattern, (err, res) => {
-          if (err) { reject(err); }
+          if (err) {
+            reject(err);
+            return;
+          }
           cursor = res[0];
           if (res[1].length > 0) {
             keys = keys.concat(res[1]);
