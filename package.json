@@ -83,6 +83,11 @@
       "json",
       "node"
     ],
-    "collectCoverage": true
+    "collectCoverage": true,
+    "globals": {
+      "ts-jest" : {
+        "tsConfig": "./tests/tsconfig.json"
+      }
+    }
   }
 }
