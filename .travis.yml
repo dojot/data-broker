@@ -11,6 +11,10 @@ env:
     - DATABROKER_PORT=18000
     - KAFKA_ADDRESS=localhost
     - ZOOKEEPER_ADDRESS=localhost
+    - KAFKA_HOSTS=localhost:9092
+    - LOCALHOST_MOCK=http://localhost:5002
+    - DATA_BROKER_URL=${LOCALHOST_MOCK}
+    - AUTH_URL=${LOCALHOST_MOCK}
 script:
   - docker build -t ${TRAVIS_REPO_SLUG} .
   - docker network create dojot-net
@@ -18,6 +22,8 @@ script:
   - docker run --rm -e ZOOKEEPER_IP=zookeeper -e KAFKA_NUM_PARTITIONS=10  --network dojot-net -p9092:9092 --name kafka -d ches/kafka:0.10.1.1
   - npm run-script build
   - npm run-script build-tests
+  - npm run mocks &
+  - sleep 10
   - npm test
   - ./tests/start-test.sh
 after_success:

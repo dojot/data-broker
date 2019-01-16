@@ -21,7 +21,6 @@ describe("Consumer", () => {
     it ("should build an default Consumer", (done) => {
         const obj = new KafkaConsumer();
         const strippedObj = (obj as any);
-        expect(strippedObj.host).toEqual("kafka:9092");
         expect(strippedObj.info).toEqual(config.kafka.consumer);
         expect(strippedObj.id).toEqual(undefined);
         done();

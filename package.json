@@ -24,6 +24,7 @@
     "copy": "[ ! -d build/src/lua ] && mkdir -p build/src/lua ; cp -r src/lua/* build/src/lua",
     "build": "tsc && npm run-script copy",
     "build-tests": "tsc -p tests/tsconfig.json && npm run-script copy",
+    "mocks": "node ./tests/dojot-mock.js",
     "test": "jest --coverage ./tests/*"
   },
   "dependencies": {
