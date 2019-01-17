@@ -30,7 +30,7 @@
   "dependencies": {
     "@dojot/adminkafka": "0.0.1-alpha.6",
     "@dojot/dojot-module": "0.0.1-alpha.7",
-    "@dojot/dojot-module-logger": "0.0.1-alpha.2",
+    "@dojot/dojot-module-logger": "0.0.1-alpha.4",
     "async": "^2.5.0",
     "axios": "^0.17.1",
     "body-parser": "^1.18.2",
