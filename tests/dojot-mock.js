@@ -1,20 +1,12 @@
-const dojot = require("@dojot/dojot-module");
+"using strict";
 const express = require("express");
+const logger = require("@dojot/dojot-module-logger").logger;
 const app = express();
-const uuid = require("uuid");
-
-const messages = {
-  subjectA: {},
-  subjectB: {},
-  serviceStatus: {}
-};
 
 const APP_PORT = 5002;
-var messenger;
-
-
+const TAG = {filename: "mocks"};
 function initExpressApp() {
-  console.log("Initializing mocks");
+  logger.debug("Initializing mocks", TAG);
   app.use((req, res, next) => {
     const rawToken = req.header("authorization");
     if (rawToken !== undefined) {
@@ -34,9 +26,8 @@ function initExpressApp() {
   });
 
   app.listen(APP_PORT, "0.0.0.0", () => {
-    console.log("started");
+    logger.debug("started", TAG);
   });
 }
-
 
 initExpressApp();
