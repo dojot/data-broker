@@ -6,6 +6,8 @@ import crypto = require("crypto");
 import fs = require("fs");
 import redis = require("redis");
 
+const TAG = { filename: "redis-client"};
+
 export interface IAssignedScheme {
   replica_assigment: {
     [partition: string]: number[];
@@ -37,7 +39,7 @@ class ClientWrapper {
   public getConfig(subject: string): Promise<ITopicProfile | undefined> {
     return new Promise<ITopicProfile | undefined>((resolve, reject) => {
       this.client.select(1);
-      logger.debug(`subject: ${subject}`);
+      logger.debug(`subject: ${subject}`, TAG);
       const pattern: string = "*:" + subject;
       // let cursor: string = '0';
       let keys: any = [];

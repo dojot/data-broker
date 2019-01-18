@@ -11,6 +11,8 @@ import * as device from "./deviceManager";
 import { TranslatorV1 } from "./TranslatorV1";
 import { TranslatorV2 } from "./TranslatorV2";
 
+const TAG = { filename: "subscriber"};
+
 const parser = new ArgumentParser();
 parser.addArgument(["-t", "--topic"], {required: true});
 parser.addArgument(["-k", "--kafka"], {required: true});
@@ -39,7 +41,7 @@ if (args.version === "v1") {
 } else if (args.version === "v2") {
   translator = new TranslatorV2();
 } else {
-  logger.error("Unknown version " + args.version + " requested.", {filename: "device-cache"});
+  logger.error("Unknown version " + args.version + " requested.", TAG);
   process.exit(1);
 }
 
@@ -49,13 +51,13 @@ function handleMessage(data: kafka.Message) {
   const meta = event.metadata;
   cache.getDeviceInfo(meta.service, meta.deviceid, (err: any, deviceInfo: device.IDevice | undefined) => {
     if (err || (deviceInfo === undefined)) {
-      logger.error("Failed to process received event", err, {filename: "device-cache"});
+      logger.error(`Failed to process received event: ${err}`, TAG);
       return;
     }
 
     const translated = translator.translate(event.attrs, deviceInfo, data.topic);
     if (translated == null) {
-      logger.error("Failed to parse event", event, {filename: "device-cache"});
+      logger.error(`Failed to parse event: ${event}`, TAG);
     }
 
     axios({
@@ -64,8 +66,8 @@ function handleMessage(data: kafka.Message) {
       method: "post",
       url: args.target,
     })
-    .then(() => { logger.debug("event sent"); })
-    .catch(() => { logger.debug("failed to send request"); });
+    .then(() => { logger.debug("event sent", TAG); })
+    .catch(() => { logger.debug("failed to send request", TAG); });
   });
 
 }
@@ -73,4 +75,4 @@ function handleMessage(data: kafka.Message) {
 const options = { kafkaHost: args.kafka, groupId: args.group};
 const consumer = new kafka.ConsumerGroup(options, args.topic);
 consumer.on("message", handleMessage);
-consumer.on("error", (err) => { logger.error("kafka consumer error", err, {filename: "device-cache"}); });
+consumer.on("error", (err) => { logger.error(`kafka consumer error: ${err}`, TAG); });

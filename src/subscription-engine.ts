@@ -12,7 +12,7 @@ import { Event } from "./subscription/Event";
 import { Notification } from "./subscription/Notification";
 import { Subscription } from "./subscription/Subscription";
 
-logger.transports[0].level = "debug";
+logger.setLevel("debug");
 
 interface IAction {
   topic: string;

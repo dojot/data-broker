@@ -3,7 +3,7 @@
 
 // import engine = require("./subscription-engine");
 
-import { addLoggerEndpoint, logger } from "@dojot/dojot-module-logger";
+import { getHTTPRouter, logger } from "@dojot/dojot-module-logger";
 import bodyParser = require("body-parser");
 import express = require("express");
 import http = require("http");
@@ -16,6 +16,7 @@ import { SocketIOSingleton } from "./socketIo";
 import { SubscriptionEngine, SubscriptionType } from "./subscription-engine";
 import { TopicManagerBuilder } from "./TopicBuilder";
 
+const TAG = { filename: "subscr-mgr"};
 // For now, express is not so well supported in TypeScript.
 // A quick workaround, which apparently does not have any side effects is to
 // set app with type "any".
@@ -36,15 +37,15 @@ SocketIOSingleton.getInstance(httpServer);
 /*
  *setting log debug route to app
  */
-addLoggerEndpoint(app);
+app.use(getHTTPRouter());
 
 /*
  * Subscription management endpoints
  */
 app.post("/subscription", (request: IAuthRequest, response: express.Response) => {
   const subscription = request.body;
-  logger.debug("Received new subscription request.", {filename: "sub-mng"});
-  logger.debug(`Subscription body is: ${util.inspect(subscription, { depth: null })}`, {filename: "sub-mng"});
+  logger.debug("Received new subscription request.", TAG);
+  logger.debug(`Subscription body is: ${util.inspect(subscription, { depth: null })}`, TAG);
   if ("id" in subscription.subject.entities) {
     engine.addSubscription(SubscriptionType.id, subscription.subject.entities.id, subscription);
   } else if ("model" in subscription.subject.entities) {
@@ -59,18 +60,18 @@ app.post("/subscription", (request: IAuthRequest, response: express.Response) =>
  * Topic registry endpoints
  */
 app.get("/topic/:subject", (req: IAuthRequest, response: express.Response) => {
-  logger.debug("Received a topic GET request.", {filename: "sub-mng"});
+  logger.debug("Received a topic GET request.", TAG);
 
   if (req.service === undefined) {
-    logger.error("Service is not defined in GET request headers.", {filename: "sub-mng"});
+    logger.error("Service is not defined in GET request headers.", TAG);
     response.status(401);
     response.send({ error: "missing mandatory authorization header in get request" });
   } else {
     const topics = TopicManagerBuilder.get(req.service);
-    logger.debug(`Topic for service ${req.service} and subject ${req.params.subject}.`, {filename: "sub-mng"});
+    logger.debug(`Topic for service ${req.service} and subject ${req.params.subject}.`, TAG);
     topics.getCreateTopic(req.params.subject, (error: any, data: any) => {
       if (error) {
-        logger.error(`Failed to retrieve topic. Error is ${error}`, {filename: "sub-mng"});
+        logger.error(`Failed to retrieve topic. Error is ${error}`, TAG);
         response.status(500);
         response.send({ error: "failed to process topic" });
       } else {
@@ -84,7 +85,7 @@ app.get("/topic/:subject", (req: IAuthRequest, response: express.Response) => {
  */
 app.get("/topic/:subject/profile", (req: IAuthRequest, response: express.Response) => {
 
-  logger.debug("Received a profile GET request.");
+  logger.debug("Received a profile GET request.", TAG);
 
   if (req.service === undefined) {
     response.status(401).send({ error: "Missing mandatory authorization header in profile request" });
@@ -106,7 +107,7 @@ app.get("/topic/:subject/profile", (req: IAuthRequest, response: express.Respons
  * Setting profiles end point
  */
 app.post("/topic/:subject/profile", (req: IAuthRequest, response: express.Response) => {
-  logger.debug("Received a profile POST request.");
+  logger.debug("Received a profile POST request.", TAG);
   if (req.service === undefined) {
     response.status(401).send({ error: "Missing mandatory authorization header in profile request" });
   } else {
@@ -121,7 +122,7 @@ app.post("/topic/:subject/profile", (req: IAuthRequest, response: express.Respon
  * Editing profiles end point
  */
 app.put("/topic/:subject/profile/:tenant", (req: IAuthRequest, response: express.Response) => {
-  logger.debug(`Received a profile PUT request for tenant ${req.params.tenant}`);
+  logger.debug(`Received a profile PUT request for tenant ${req.params.tenant}`, TAG);
 
   if (req.service === undefined) {
     response.status(401).send({ error: "Missing mandatory authorization header in profile request" });
@@ -138,9 +139,9 @@ app.put("/topic/:subject/profile/:tenant", (req: IAuthRequest, response: express
  * SocketIO endpoint
  */
 app.get("/socketio", (req: IAuthRequest, response: express.Response) => {
-  logger.debug("Received a request for a new socketIO connection.", {filename: "sub-mng"});
+  logger.debug("Received a request for a new socketIO connection.", TAG);
   if (req.service === undefined) {
-    logger.error("Service is not defined in SocketIO connection request headers.", {filename: "sub-mng"});
+    logger.error("Service is not defined in SocketIO connection request headers.", TAG);
     response.status(401);
     response.send({ error: "missing mandatory authorization header in socketio request" });
   } else {
@@ -150,5 +151,5 @@ app.get("/socketio", (req: IAuthRequest, response: express.Response) => {
 });
 
 httpServer.listen(config.broker.port, () => {
-  logger.debug("Subscription manager listening on port " + config.broker.port, {filename: "sub-mng"});
+  logger.debug("Subscription manager listening on port " + config.broker.port, TAG);
 });

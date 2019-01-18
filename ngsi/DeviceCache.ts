@@ -6,6 +6,7 @@ import axios, {AxiosError, AxiosResponse} from "axios";
 import util = require("util");
 import * as device from "./deviceManager";
 
+const TAG = { filename: "device-cache"};
 type DeviceRequestCallback = (err: any, data: device.IDevice | undefined) => void;
 
 function generateJWT(service: string) {
@@ -23,10 +24,10 @@ class DeviceCache {
     this.deviceManager = deviceManager;
   }
   public getDeviceInfo(service: string, deviceId: string, cb: DeviceRequestCallback): void {
-    logger.debug("Got a request for device info...", {filename: "device-cache"});
+    logger.debug("Got a request for device info...", TAG);
     const data = this.deviceInfo[this.parseKey(service, deviceId)];
     if (data === undefined) {
-      logger.debug("No data in cache.", {filename: "device-cache"});
+      logger.debug("No data in cache.", TAG);
       this.requestDeviceInfo(service, deviceId, cb);
     } else {
       cb(null, data);
@@ -34,24 +35,24 @@ class DeviceCache {
   }
 
   private requestDeviceInfo(service: string, deviceId: string, cb: DeviceRequestCallback): void {
-    logger.debug("Retrieving device info from DeviceManager...", {filename: "device-cache"});
+    logger.debug("Retrieving device info from DeviceManager...", TAG);
     axios({
       headers: {authorization: "Bearer " + generateJWT(service)},
       method: "get",
       url: this.deviceManager + "/device/" + deviceId,
     })
     .then((response: AxiosResponse) => {
-      logger.debug("... device info was retrieved.", {filename: "device-cache"});
-      logger.debug(`Data is: ${util.inspect(response.data, {depth: null})}`, {filename: "device-cache"});
+      logger.debug("... device info was retrieved.", TAG);
+      logger.debug(`Data is: ${util.inspect(response.data, {depth: null})}`, TAG);
       this.deviceInfo[this.parseKey(service, deviceId)] = response.data;
       cb(null, response.data);
     })
     .catch((error: AxiosError) => {
-      logger.debug("... device info was not retrieved.", {filename: "device-cache"});
-      logger.error(`Error is: ${error}`);
+      logger.debug("... device info was not retrieved.", TAG);
+      logger.error(`Error is: ${error}`, TAG);
       cb(error, undefined);
     });
-    logger.debug("... request for DeviceManager was sent.", {filename: "device-cache"});
+    logger.debug("... request for DeviceManager was sent.", TAG);
   }
 
   private parseKey(service: string, deviceId: string): string {

@@ -8,6 +8,8 @@ import { QueuedTopic } from "./QueuedTopic";
 import { ClientWrapper, IAutoScheme } from "./RedisClientWrapper";
 import { RedisManager } from "./redisManager";
 
+const TAG = { filename: "topicManager"};
+
 type TopicCallback = (error?: any, topic?: string) => void;
 
 // TODO this should also handle kafka ACL configuration
@@ -54,7 +56,7 @@ class TopicManager {
         }
       }
     } catch (error) {
-      logger.debug("Profiles could not be config");
+      logger.debug("Profiles could not be config", TAG);
     }
   }
 
@@ -64,34 +66,34 @@ class TopicManager {
   }
 
   public getCreateTopic(subject: string, callback: TopicCallback | undefined): void {
-    logger.debug("Retrieving/creating new topic...", {filename: "topicManager"});
-    logger.debug(`Subject: ${subject}`, {filename: "topicManager"});
+    logger.debug("Retrieving/creating new topic...", TAG);
+    logger.debug(`Subject: ${subject}`, TAG);
     try {
       const key: string = this.parseKey(subject);
       const tid: string = uuid();
       this.redis.runScript(this.getSet, [key], [tid], (err: any, topic: string) => {
         if (err && callback) {
-          logger.debug("... topic could not be created/retrieved.", {filename: "topicManager"});
-          logger.error(`Error while calling REDIS: ${err}`, {filename: "topicManager"});
+          logger.debug("... topic could not be created/retrieved.", TAG);
+          logger.error(`Error while calling REDIS: ${err}`, TAG);
           callback(err);
         }
 
-        logger.debug("... topic was properly created/retrievied.", {filename: "topicManager"});
+        logger.debug("... topic was properly created/retrievied.", TAG);
         const request = { topic, subject, callback };
         if (this.producerReady) {
-          logger.debug("Handling all pending requests...", {filename: "topicManager"});
+          logger.debug("Handling all pending requests...", TAG);
           this.handleRequest(request);
-          logger.debug("... all pending requests were handled.", {filename: "topicManager"});
+          logger.debug("... all pending requests were handled.", TAG);
         } else {
-          logger.debug("Producer is not yet ready.", {filename: "topicManager"});
-          logger.debug("Adding to the pending requests queue...", {filename: "topicManager"});
+          logger.debug("Producer is not yet ready.", TAG);
+          logger.debug("Adding to the pending requests queue...", TAG);
           this.topicQueue.push(request);
-          logger.debug("... topic was added to queue.", {filename: "topicManager"});
+          logger.debug("... topic was added to queue.", TAG);
         }
       });
     } catch (error) {
-      logger.debug("... topic could not be created/retrieved.", {filename: "topicManager"});
-      logger.error(`An exception was thrown: ${error}`, {filename: "topicManager"});
+      logger.debug("... topic could not be created/retrieved.", TAG);
+      logger.error(`An exception was thrown: ${error}`, TAG);
       if (callback) {
         callback(error);
       }
@@ -99,9 +101,9 @@ class TopicManager {
   }
 
   public destroy() {
-    logger.debug("Closing down this topic manager...", {filename: "topicManager"});
+    logger.debug("Closing down this topic manager...", TAG);
     this.producer.close();
-    logger.debug("... topic manager was closed.", {filename: "topicManager"});
+    logger.debug("... topic manager was closed.", TAG);
   }
 
   private assertTopic(topicid: string, message: string): void {

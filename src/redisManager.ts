@@ -7,12 +7,14 @@ import util = require("util");
 import config = require("./config");
 import { ClientWrapper } from "./RedisClientWrapper";
 
+const TAG = { filename: "redis-mgr"};
+
 class RedisManager {
   private redis: redis.RedisClient;
 
   constructor() {
-    logger.debug(`Redis configuration is:`);
-    logger.debug(`${util.inspect(config.cache, { depth: null })}`);
+    logger.debug(`Redis configuration is:`, TAG);
+    logger.debug(`${util.inspect(config.cache, { depth: null })}`, TAG);
     const cacheUser = config.cache.user;
     const cachePwd = config.cache.pwd;
     const cacheHost = `${config.cache.address}:${config.cache.port}`;
