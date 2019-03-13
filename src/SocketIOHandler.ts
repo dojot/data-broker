@@ -42,7 +42,7 @@ class SocketIOHandler {
         logger.debug(`Handling message for tenant ${tenant}`, TAG);
         this.handleMessage(tenant, data);
       });
-    }).catch(error => {
+    }).catch((error) => {
       logger.error(`Failed to initialize kafka-messenger (${error})`, {filename: "SocketIOHandler"});
       process.kill(process.pid, "SIGTERM");
     });
