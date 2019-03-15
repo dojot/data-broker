@@ -13,6 +13,7 @@ script:
   - npm test
   - 'docker build -t ${TRAVIS_REPO_SLUG} . -f ./docker/Dockerfile'
   - 'docker build -t dredd-tests . -f ./tests/Dockerfile'
+  - 'docker-compose -f ./tests/docker-compose.yml up -d auth-redis postgres postgres-users auth'
   - 'docker-compose -f ./tests/docker-compose.yml up -d kafka data-broker-redis'
   - 'docker-compose -f ./tests/docker-compose.yml run data-broker'
 install:
