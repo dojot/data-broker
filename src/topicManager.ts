@@ -93,7 +93,7 @@ class TopicManager {
 
   public getCreateTopic(
     subject: string,
-    callback: TopicCallback | undefined
+    callback: TopicCallback | undefined,
   ): void {
     logger.debug("Retrieving/creating new topic...", TAG);
     logger.debug(`Subject: ${subject}`, TAG);
@@ -123,7 +123,7 @@ class TopicManager {
             this.topicQueue.push(request);
             logger.debug("... topic was added to queue.", TAG);
           }
-        }
+        },
       );
     } catch (error) {
       logger.debug("... topic could not be created/retrieved.", TAG);
