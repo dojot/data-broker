@@ -1,0 +1,14 @@
+{
+    "topicProfile": {
+        "device-data": {
+            "*": {
+                "replication_factor": 1,
+                "num_partitions": 1
+            },
+            "admin": {
+                "replication_factor": 1,
+                "num_partitions": 4
+            }
+        }
+    }
+}

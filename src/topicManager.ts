@@ -2,10 +2,11 @@
 "use strict";
 
 import { logger } from "@dojot/dojot-module-logger";
+import * as util from "util";
 import uuid = require("uuid/v4");
 import { KafkaProducer } from "./producer";
 import { QueuedTopic } from "./QueuedTopic";
-import { ClientWrapper, IAutoScheme } from "./RedisClientWrapper";
+import { ClientWrapper, IAutoScheme, ITopicProfile } from "./RedisClientWrapper";
 import { RedisManager } from "./redisManager";
 
 const TAG = {filename: "topicManager"};
@@ -22,7 +23,7 @@ class TopicManager {
   private topicQueue: QueuedTopic[];
 
   constructor(service: string) {
-    if ((service === undefined) || service.length === 0) {
+    if (service === undefined || service.length === 0) {
       throw new Error("a valid service id must be supplied");
     }
 
@@ -60,37 +61,70 @@ class TopicManager {
     }
   }
 
+  public loadConfigTopics(profiles: ITopicProfile) {
+    logger.debug("Consulting Redis to check whether there's something already configured...", TAG);
+    this.redis
+      .getConfig("*")
+      .then((results: ITopicProfile) => {
+        if (Object.keys(results).length === 0) {
+          logger.info(`Redis is empty. Loading profiles.`, TAG);
+          logger.debug(`Profiles are: ${util.inspect(profiles, {depth: null})}`, TAG);
+          for (const subject in profiles) {
+            if (profiles.hasOwnProperty(subject)) {
+              logger.debug(`Inserting subject ${subject}`, TAG);
+              this.setConfigTopics(subject, profiles[subject]);
+            }
+          }
+        } else {
+          logger.warn(`Redis already has entries. Aborting.`, TAG);
+          logger.warn(`Redis data: ${util.inspect(results, {depth: null})}`, TAG);
+        }
+      })
+      .catch((error: any) => {
+        logger.error(`Error while accessing redis: ${error}`, TAG);
+      });
+    logger.debug("... redis query requested.", TAG);
+  }
+
   public editConfigTopics(subject: string, tenant: string, body: any) {
     const key: string = tenant + ":" + subject;
     this.redis.setConfig(key, JSON.stringify(body[tenant]));
   }
 
-  public getCreateTopic(subject: string, callback: TopicCallback | undefined): void {
+  public getCreateTopic(
+    subject: string,
+    callback: TopicCallback | undefined
+  ): void {
     logger.debug("Retrieving/creating new topic...", TAG);
     logger.debug(`Subject: ${subject}`, TAG);
     try {
       const key: string = this.parseKey(subject);
       const tid: string = uuid();
-      this.redis.runScript(this.getSet, [key], [tid], (err: any, topic: string) => {
-        if (err && callback) {
-          logger.debug("... topic could not be created/retrieved.", TAG);
-          logger.error(`Error while calling REDIS: ${err}`, TAG);
-          callback(err);
-        }
+      this.redis.runScript(
+        this.getSet,
+        [key],
+        [tid],
+        (err: any, topic: string) => {
+          if (err && callback) {
+            logger.debug("... topic could not be created/retrieved.", TAG);
+            logger.error(`Error while calling REDIS: ${err}`, TAG);
+            callback(err);
+          }
 
-        logger.debug("... topic was properly created/retrievied.", TAG);
-        const request = { topic, subject, callback };
-        if (this.producerReady) {
-          logger.debug("Handling all pending requests...", TAG);
-          this.handleRequest(request);
-          logger.debug("... all pending requests were handled.", TAG);
-        } else {
-          logger.debug("Producer is not yet ready.", TAG);
-          logger.debug("Adding to the pending requests queue...", TAG);
-          this.topicQueue.push(request);
-          logger.debug("... topic was added to queue.", TAG);
+          logger.debug("... topic was properly created/retrievied.", TAG);
+          const request = { topic, subject, callback };
+          if (this.producerReady) {
+            logger.debug("Handling all pending requests...", TAG);
+            this.handleRequest(request);
+            logger.debug("... all pending requests were handled.", TAG);
+          } else {
+            logger.debug("Producer is not yet ready.", TAG);
+            logger.debug("Adding to the pending requests queue...", TAG);
+            this.topicQueue.push(request);
+            logger.debug("... topic was added to queue.", TAG);
+          }
         }
-      });
+      );
     } catch (error) {
       logger.debug("... topic could not be created/retrieved.", TAG);
       logger.error(`An exception was thrown: ${error}`, TAG);
@@ -107,7 +141,7 @@ class TopicManager {
   }
 
   private assertTopic(topicid: string, message: string): void {
-    if ((topicid === undefined) || topicid.length === 0) {
+    if (topicid === undefined || topicid.length === 0) {
       throw new Error(message);
     }
   }
@@ -118,18 +152,27 @@ class TopicManager {
   }
 
   private handleRequest(request: QueuedTopic) {
-    const profileConfigs: IAutoScheme = { num_partitions: 1, replication_factor: 1 };
+    const profileConfigs: IAutoScheme = {
+      num_partitions: 1,
+      replication_factor: 1,
+    };
     const genericService: string = "*";
     this.redis.getConfig(request.subject).then((data: any) => {
       if (data !== undefined) {
         if (data.hasOwnProperty(this.service)) {
           profileConfigs.num_partitions = data[this.service].num_partitions;
-          profileConfigs.replication_factor = data[this.service].replication_factor;
+          profileConfigs.replication_factor =
+            data[this.service].replication_factor;
         } else if (data.hasOwnProperty("*")) {
           profileConfigs.num_partitions = data[genericService].num_partitions;
-          profileConfigs.replication_factor = data[genericService].replication_factor;
+          profileConfigs.replication_factor =
+            data[genericService].replication_factor;
         }
-        this.producer.createTopic(request.topic, profileConfigs, request.callback);
+        this.producer.createTopic(
+          request.topic,
+          profileConfigs,
+          request.callback,
+        );
       }
     });
   }

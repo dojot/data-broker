@@ -6,7 +6,9 @@
 import { getHTTPRouter, logger } from "@dojot/dojot-module-logger";
 import bodyParser = require("body-parser");
 import express = require("express");
+import { readFileSync } from "fs";
 import http = require("http");
+import * as minimist from "minimist";
 import morgan = require("morgan");
 import util = require("util");
 import { authEnforce, authParse, IAuthRequest } from "./api/authMiddleware";
@@ -33,6 +35,20 @@ const engine = new SubscriptionEngine();
 const httpServer = http.createServer(app);
 // make sure singleton is instantiated
 SocketIOSingleton.getInstance(httpServer);
+
+/**
+ * Loading pre-configured topic profiles
+ */
+const argv = minimist(process.argv.slice(2));
+if ("config" in argv) {
+  logger.debug(`Reading config file from ${argv.config}`, TAG);
+  const topics = TopicManagerBuilder.get("dummy");
+  const configFile = JSON.parse(readFileSync(argv.config).toString());
+  logger.debug(`Configuration file is: ${util.inspect(configFile, {depth: null})}`, TAG);
+  logger.debug("Loading topic profile...", TAG);
+  topics.loadConfigTopics(configFile.topicProfile);
+  logger.debug("... topic profiles were loaded.", TAG);
+}
 
 /*
  *setting log debug route to app

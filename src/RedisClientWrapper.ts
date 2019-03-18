@@ -36,8 +36,8 @@ class ClientWrapper {
    * Gets profile configs for a given subject
    * @param subject
    */
-  public getConfig(subject: string): Promise<ITopicProfile | undefined> {
-    return new Promise<ITopicProfile | undefined>((resolve, reject) => {
+  public getConfig(subject: string): Promise<ITopicProfile> {
+    return new Promise<ITopicProfile>((resolve, reject) => {
       this.client.select(1);
       logger.debug(`subject: ${subject}`, TAG);
       const pattern: string = "*:" + subject;

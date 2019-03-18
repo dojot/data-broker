@@ -18,5 +18,5 @@ ENTRYPOINT ["/sbin/tini", "--"]
 COPY --from=basis  /opt/data-broker /opt/data-broker
 WORKDIR /opt/data-broker
 EXPOSE 80
-CMD ["npm", "run", "subscription"]
+CMD ["npm", "run", "subscription", "--", "--config=./profile-config.json"]
 
