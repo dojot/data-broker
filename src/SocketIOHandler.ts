@@ -210,8 +210,7 @@ class SocketIOHandler {
             logger.error("Received data is not a valid dojot event - has no event", TAG);
             return;
         } else if (data.event !== "configure") {
-            logger.debug("... received actuator message was not successfully processed.", TAG);
-            logger.debug("Received data is not a valid dojot event - event is not configure", TAG);
+            logger.debug("... received message is not an actuation one, discarding it.", TAG);
             return;
         }
 
