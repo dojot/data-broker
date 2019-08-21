@@ -176,8 +176,7 @@ function main() {
   logger.setLevel(process.env.LOG_LEVEL || "info");
 
   const app = express();
-  const subscrEngine = new SubscriptionEngine();
-  const dataBroker = new DataBroker(app, subscrEngine);
+  const dataBroker = new DataBroker(app);
   dataBroker.start();
 }
 
