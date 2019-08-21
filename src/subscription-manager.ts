@@ -11,17 +11,14 @@ import { AgentHealthChecker } from "./Healthcheck";
 import { ITopicProfile } from "./RedisClientWrapper";
 import { RedisManager } from "./redisManager";
 import { SocketIOSingleton } from "./socketIo";
-import { SubscriptionEngine, SubscriptionType } from "./subscription-engine";
 import { TopicManagerBuilder } from "./TopicBuilder";
 
 const TAG = { filename: "sub-mng" };
 
 class DataBroker {
   private app: express.Application;
-  private subscrEngine: SubscriptionEngine;
-  constructor(app: express.Application, subscriptionEngine: SubscriptionEngine) {
+  constructor(app: express.Application) {
     this.app = app;
-    this.subscrEngine = subscriptionEngine;
   }
 
   public start() {
