@@ -75,23 +75,6 @@ class DataBroker {
 
   protected registerTopicEndpoints() {
     /*
-     * Subscription management endpoints
-     */
-    this.app.post("/subscription", (request: IAuthRequest, response: express.Response) => {
-      const subscription = request.body;
-      logger.debug("Received new subscription request.", TAG);
-      logger.debug(`Subscription body is: ${util.inspect(subscription, { depth: null })}`, TAG);
-      if ("id" in subscription.subject.entities) {
-        this.subscrEngine.addSubscription(SubscriptionType.id, subscription.subject.entities.id, subscription);
-      } else if ("model" in subscription.subject.entities) {
-        this.subscrEngine.addSubscription(SubscriptionType.model, subscription.subject.entities.model, subscription);
-      } else if ("type" in subscription.subject.entities) {
-        this.subscrEngine.addSubscription(SubscriptionType.type, subscription.subject.entities.type, subscription);
-      }
-      response.send("Ok!");
-    });
-
-    /*
      * Topic registry endpoints
      */
     this.app.get("/topic/:subject", (req: IAuthRequest, response: express.Response) => {
