@@ -1,0 +1,1156 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-JS-FSTREAM-174725:
+    - '@dojot/adminkafka > node-gyp > tar > fstream':
+        reason: The adminkafka library will be removed
+        expires: '2019-09-21T11:34:51.388Z'
+      '@dojot/adminkafka > node-gyp > fstream':
+        reason: The adminkafka library will be removed soon
+        expires: '2019-09-21T12:20:21.450Z'
+  SNYK-JS-TAR-174125:
+    - '@dojot/adminkafka > node-gyp > tar':
+        reason: The adminkafka library will be removed
+        expires: '2019-09-21T11:34:51.388Z'
+  'npm:braces:20180219':
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-jasmine2 > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.423Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-environment-jsdom > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.424Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-jasmine2 > expect > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.424Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > test-exclude > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.424Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-jasmine2 > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.424Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-environment-node > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.424Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-environment-node > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.425Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-environment-node > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.425Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-environment-jsdom > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.425Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-jasmine2 > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.425Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-jasmine2 > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.425Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.425Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-environment-jsdom > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.425Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-jasmine2 > expect > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.425Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-jasmine2 > expect > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.425Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > test-exclude > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.426Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-jest > babel-plugin-istanbul > test-exclude > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.426Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-jasmine2 > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.426Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-jasmine2 > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.426Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-jasmine2 > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.426Z'
+    - jest > jest-cli > jest-config > babel-jest > babel-plugin-istanbul > test-exclude > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.426Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.426Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.426Z'
+    - jest > jest-cli > jest-config > jest-environment-node > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.426Z'
+    - jest > jest-cli > jest-runner > jest-jasmine2 > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.427Z'
+    - jest > jest-cli > jest-config > jest-jasmine2 > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.427Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-jasmine2 > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.427Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-jasmine2 > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.427Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.427Z'
+    - jest > jest-cli > jest-runner > jest-jasmine2 > expect > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.427Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.427Z'
+    - jest > jest-cli > jest-config > jest-environment-jsdom > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.427Z'
+    - jest > jest-cli > jest-runner > jest-jasmine2 > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.427Z'
+    - jest > jest-cli > jest-config > jest-jasmine2 > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.428Z'
+    - jest > jest-cli > jest-config > jest-jasmine2 > expect > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.428Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-plugin-istanbul > test-exclude > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.428Z'
+    - jest > jest-cli > jest-runtime > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.428Z'
+    - jest > jest-cli > jest-runtime > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.428Z'
+    - jest > jest-cli > jest-resolve-dependencies > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.428Z'
+    - jest > jest-cli > jest-config > jest-jasmine2 > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.428Z'
+    - jest > jest-cli > jest-runner > jest-jasmine2 > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.428Z'
+    - jest > jest-cli > jest-environment-jsdom > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.428Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.428Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.428Z'
+    - jest > jest-cli > jest-runtime > babel-plugin-istanbul > test-exclude > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.429Z'
+    - jest > jest-cli > jest-runner > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.429Z'
+    - jest > jest-cli > jest-config > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.429Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.429Z'
+    - jest > jest-cli > jest-util > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.429Z'
+    - jest > jest-cli > jest-runner > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.429Z'
+    - jest > jest-cli > jest-runtime > jest-config > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.429Z'
+    - jest > jest-cli > jest-runner > jest-config > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.429Z'
+    - jest > jest-cli > jest-runner > jest-runtime > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.429Z'
+    - jest > jest-cli > jest-runtime > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.429Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.429Z'
+    - jest > jest-cli > jest-snapshot > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.429Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.430Z'
+    - jest > jest-cli > jest-haste-map > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.430Z'
+    - jest > jest-cli > jest-config > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.430Z'
+    - jest > jest-cli > jest-runtime > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.430Z'
+    - jest > jest-cli > jest-message-util > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.430Z'
+    - jest > jest-cli > micromatch > braces:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.430Z'
+  'npm:mem:20180117':
+    - jest > jest-cli > jest-runtime > yargs > os-locale > mem:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.424Z'
+    - jest > jest-cli > yargs > os-locale > mem:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.424Z'
+    - jest > jest-cli > jest-runner > jest-runtime > yargs > os-locale > mem:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.424Z'
+  SNYK-JS-MIXINDEEP-450212:
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > micromatch > braces > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.430Z'
+    - jest > jest-cli > jest-haste-map > sane > micromatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-haste-map > sane > micromatch > nanomatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-haste-map > sane > micromatch > extglob > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-haste-map > sane > anymatch > micromatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-haste-map > sane > micromatch > braces > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > micromatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > micromatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > micromatch > extglob > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > micromatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-haste-map > sane > micromatch > extglob > expand-brackets > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-haste-map > sane > anymatch > micromatch > braces > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-haste-map > sane > anymatch > micromatch > extglob > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > micromatch > extglob > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > micromatch > braces > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > micromatch > braces > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > anymatch > micromatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-haste-map > sane > anymatch > micromatch > nanomatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > micromatch > nanomatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > micromatch > nanomatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > anymatch > micromatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > anymatch > micromatch > braces > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > anymatch > micromatch > braces > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > micromatch > extglob > expand-brackets > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > micromatch > extglob > expand-brackets > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > micromatch > extglob > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > anymatch > micromatch > nanomatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > anymatch > micromatch > nanomatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.438Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > micromatch > nanomatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > anymatch > micromatch > extglob > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > anymatch > micromatch > extglob > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-haste-map > sane > anymatch > micromatch > extglob > expand-brackets > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > anymatch > micromatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > anymatch > micromatch > nanomatch > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > anymatch > micromatch > extglob > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > micromatch > extglob > expand-brackets > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > anymatch > micromatch > extglob > expand-brackets > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > anymatch > micromatch > extglob > expand-brackets > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > anymatch > micromatch > braces > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > anymatch > micromatch > extglob > expand-brackets > snapdragon > base > mixin-deep:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+  SNYK-JS-LODASH-450202:
+    - jest > jest-cli > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-generator > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.430Z'
+    - jest > jest-cli > jest-config > babel-core > babel-helpers > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.430Z'
+    - jest > jest-cli > istanbul-api > istanbul-lib-instrument > babel-generator > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.430Z'
+    - jest > jest-cli > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.430Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-snapshot > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.430Z'
+    - jest > jest-cli > jest-config > babel-core > babel-generator > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.430Z'
+    - jest > jest-cli > jest-runner > jest-jasmine2 > jest-snapshot > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.430Z'
+    - jest > jest-cli > istanbul-api > istanbul-reports > handlebars > async > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.431Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-core > babel-register > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.431Z'
+    - jest > jest-cli > jest-runtime > babel-core > babel-generator > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.431Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-core > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.431Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-jasmine2 > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.431Z'
+    - jest > jest-cli > jest-config > babel-core > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.431Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-core > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.431Z'
+    - jest > jest-cli > jest-runtime > babel-core > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.431Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-jasmine2 > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.431Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-core > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.431Z'
+    - jest > jest-cli > jest-config > jest-jasmine2 > jest-snapshot > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.431Z'
+    - jest > jest-cli > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.431Z'
+    - jest > jest-cli > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.431Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-jasmine2 > jest-snapshot > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.431Z'
+    - jest > jest-cli > jest-config > jest-environment-jsdom > jsdom > request-promise-native > request-promise-core > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-generator > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-core > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-core > babel-generator > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-core > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-core > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-core > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-core > babel-generator > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-core > babel-generator > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-runtime > babel-core > babel-helpers > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-jasmine2 > jest-snapshot > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > istanbul-api > istanbul-lib-instrument > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-config > babel-core > babel-helpers > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-core > babel-register > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-core > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-core > babel-helpers > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.432Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-core > babel-helpers > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-core > babel-helpers > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-generator > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-generator > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-config > babel-core > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-jasmine2 > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-core > babel-generator > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runtime > babel-core > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-core > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-jasmine2 > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-jasmine2 > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-core > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-core > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-core > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-core > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-core > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.433Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-core > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runtime > babel-core > babel-helpers > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-config > babel-core > babel-helpers > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-core > babel-helpers > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-core > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-core > babel-helpers > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-core > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runner > jest-config > jest-environment-jsdom > jsdom > request-promise-native > request-promise-core > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runtime > jest-config > jest-environment-jsdom > jsdom > request-promise-native > request-promise-core > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-generator > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-generator > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-jasmine2 > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-core > babel-generator > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-core > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.434Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-jasmine2 > jest-snapshot > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-core > babel-helpers > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-core > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-core > babel-helpers > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-core > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-core > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runtime > babel-core > babel-helpers > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-core > babel-helpers > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-generator > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-generator > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-core > babel-helpers > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-config > babel-core > babel-helpers > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-core > babel-helpers > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-generator > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.435Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-core > babel-helpers > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-core > babel-helpers > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-core > babel-helpers > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-generator > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-core > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-core > babel-helpers > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-core > babel-helpers > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.436Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > jest-environment-jsdom > jsdom > request-promise-native > request-promise-core > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-core > babel-helpers > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-generator > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+    - jest > jest-cli > jest-runtime > babel-core > babel-helpers > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-core > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.445Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-core > babel-generator > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.445Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-core > babel-generator > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.445Z'
+    - jest > jest-cli > istanbul-api > istanbul-lib-instrument > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.445Z'
+    - jest > jest-cli > jest-runner > jest-jasmine2 > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.445Z'
+    - jest > jest-cli > jest-config > jest-jasmine2 > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.445Z'
+    - jest > jest-cli > istanbul-lib-instrument > babel-template > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.446Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-core > babel-generator > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.446Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-core > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.446Z'
+    - jest > jest-cli > jest-runtime > babel-core > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.446Z'
+    - jest > jest-cli > istanbul-api > istanbul-lib-instrument > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.446Z'
+    - jest > jest-cli > jest-config > babel-core > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.446Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-config > babel-core > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.446Z'
+    - jest > jest-cli > jest-config > babel-core > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.446Z'
+    - jest > jest-cli > jest-runtime > babel-core > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.446Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-core > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.446Z'
+    - jest > jest-cli > jest-environment-jsdom > jsdom > request-promise-native > request-promise-core > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.446Z'
+    - jest > jest-cli > jest-runtime > babel-plugin-istanbul > istanbul-lib-instrument > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.447Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-core > babel-register > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.447Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-core > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.447Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-core > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.447Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-core > babel-register > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.447Z'
+    - jest > jest-cli > istanbul-api > istanbul-lib-instrument > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.447Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-core > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.447Z'
+    - jest > jest-cli > jest-config > jest-jasmine2 > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.447Z'
+    - jest > jest-cli > istanbul-api > istanbul-lib-instrument > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.447Z'
+    - jest > jest-cli > jest-config > babel-core > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.447Z'
+    - jest > jest-cli > jest-runtime > babel-core > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.447Z'
+    - jest > jest-cli > jest-runner > jest-runtime > babel-core > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.447Z'
+    - jest > jest-cli > jest-resolve-dependencies > jest-snapshot > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.447Z'
+    - jest > jest-cli > jest-runtime > jest-snapshot > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.448Z'
+    - jest > jest-cli > istanbul-lib-instrument > babel-template > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.448Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-core > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.448Z'
+    - jest > jest-cli > istanbul-api > istanbul-lib-instrument > babel-generator > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.448Z'
+    - jest > jest-cli > istanbul-lib-instrument > babel-generator > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.448Z'
+    - jest > jest-cli > jest-config > babel-core > babel-generator > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.448Z'
+    - jest > jest-cli > jest-config > babel-core > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.448Z'
+    - jest > jest-cli > istanbul-lib-instrument > babel-template > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.448Z'
+    - jest > jest-cli > istanbul-lib-instrument > babel-traverse > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.448Z'
+    - jest > jest-cli > istanbul-api > istanbul-lib-instrument > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.448Z'
+    - jest > jest-cli > jest-runtime > jest-config > babel-core > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.448Z'
+    - jest > jest-cli > jest-config > babel-core > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.448Z'
+    - jest > jest-cli > jest-runtime > babel-core > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.448Z'
+    - jest > jest-cli > jest-runtime > babel-core > babel-register > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.449Z'
+    - jest > jest-cli > jest-runner > jest-jasmine2 > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.449Z'
+    - jest > jest-cli > istanbul-api > istanbul-lib-instrument > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.449Z'
+    - jest > jest-cli > jest-config > babel-core > babel-register > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.449Z'
+    - jest > jest-cli > jest-runtime > babel-core > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.449Z'
+    - jest > jest-cli > jest-runtime > babel-core > babel-generator > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.449Z'
+    - jest > jest-cli > istanbul-lib-instrument > babel-template > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.449Z'
+    - jest > jest-cli > istanbul-api > async > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.449Z'
+    - jest > jest-cli > istanbul-lib-instrument > babel-traverse > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.449Z'
+    - jest > jest-cli > istanbul-lib-instrument > babel-generator > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.449Z'
+    - jest > jest-cli > jest-snapshot > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.449Z'
+    - jest > jest-cli > jest-config > babel-core > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.449Z'
+    - jest > jest-cli > istanbul-lib-instrument > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.450Z'
+    - jest > jest-cli > jest-runtime > babel-core > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.450Z'
+    - jest > jest-cli > jest-runner > jest-config > babel-jest > babel-plugin-istanbul > istanbul-lib-instrument > babel-generator > babel-types > lodash:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.450Z'
+  SNYK-JS-HANDLEBARS-173692:
+    - jest > jest-cli > istanbul-api > istanbul-reports > handlebars:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.437Z'
+  SNYK-JS-SETVALUE-450213:
+    - jest > jest-cli > jest-haste-map > sane > micromatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-haste-map > sane > micromatch > nanomatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-haste-map > sane > micromatch > extglob > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-haste-map > sane > anymatch > micromatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-haste-map > sane > micromatch > braces > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > micromatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > micromatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > micromatch > extglob > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.439Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > micromatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-haste-map > sane > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-haste-map > sane > anymatch > micromatch > braces > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-haste-map > sane > anymatch > micromatch > extglob > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > micromatch > extglob > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > micromatch > braces > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > micromatch > braces > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > anymatch > micromatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-haste-map > sane > anymatch > micromatch > nanomatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > micromatch > nanomatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > micromatch > nanomatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > anymatch > micromatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > anymatch > micromatch > braces > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > anymatch > micromatch > braces > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > micromatch > extglob > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > anymatch > micromatch > nanomatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.440Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > anymatch > micromatch > nanomatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.441Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > micromatch > braces > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.441Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > micromatch > nanomatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.441Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > anymatch > micromatch > extglob > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.441Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > anymatch > micromatch > extglob > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.441Z'
+    - jest > jest-cli > jest-haste-map > sane > anymatch > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.441Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > anymatch > micromatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.441Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > anymatch > micromatch > nanomatch > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.441Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > anymatch > micromatch > extglob > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.441Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.441Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > anymatch > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.441Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > anymatch > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > anymatch > micromatch > braces > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > anymatch > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-haste-map > sane > micromatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-haste-map > sane > micromatch > nanomatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-haste-map > sane > micromatch > extglob > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-haste-map > sane > anymatch > micromatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-haste-map > sane > micromatch > braces > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > micromatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > micromatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > micromatch > extglob > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > micromatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-haste-map > sane > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-haste-map > sane > anymatch > micromatch > braces > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-haste-map > sane > anymatch > micromatch > extglob > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > micromatch > extglob > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > micromatch > braces > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.442Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > micromatch > braces > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.443Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > anymatch > micromatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.443Z'
+    - jest > jest-cli > jest-haste-map > sane > anymatch > micromatch > nanomatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.443Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > micromatch > nanomatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.443Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > micromatch > nanomatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.443Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > anymatch > micromatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.443Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > anymatch > micromatch > braces > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.443Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > anymatch > micromatch > braces > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.443Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.443Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.443Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > micromatch > extglob > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.443Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > anymatch > micromatch > nanomatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.443Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > anymatch > micromatch > nanomatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.443Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > micromatch > braces > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.443Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > micromatch > nanomatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.443Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > anymatch > micromatch > extglob > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.444Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > anymatch > micromatch > extglob > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.444Z'
+    - jest > jest-cli > jest-haste-map > sane > anymatch > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.444Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > anymatch > micromatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.444Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > anymatch > micromatch > nanomatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.444Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > anymatch > micromatch > extglob > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.444Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.444Z'
+    - jest > jest-cli > jest-runner > jest-haste-map > sane > anymatch > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.445Z'
+    - jest > jest-cli > jest-runtime > jest-haste-map > sane > anymatch > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.445Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > anymatch > micromatch > braces > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.445Z'
+    - jest > jest-cli > jest-runner > jest-runtime > jest-haste-map > sane > anymatch > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > union-value > set-value:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.445Z'
+  SNYK-JS-HANDLEBARS-174183:
+    - jest > jest-cli > istanbul-api > istanbul-reports > handlebars:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.450Z'
+  SNYK-JS-JSYAML-173999:
+    - jest > jest-cli > istanbul-api > js-yaml:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.450Z'
+  SNYK-JS-JSYAML-174129:
+    - jest > jest-cli > istanbul-api > js-yaml:
+        reason: ts-lint does not support Jest 24 by now
+        expires: '2019-09-21T12:20:21.450Z'
+patch: {}
