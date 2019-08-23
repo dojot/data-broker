@@ -87,3 +87,19 @@ On both cases, as we are dealing with kafka queues, it is up to the consumers of
 to keep track of where the head of its processed queue is at. That allows consumers to process events
 at their own pace, thus avoiding unwanted data loss in the process. Another important characteristic
 of the configured topics is that, at the moment, they are single-partitioned.
+
+## Removal Notes
+
+The Subscription service is being removed from Data Broker because of its lack of use. As a consequence,
+the endpoint `/subscription` is being removed.
+
+With the removal of subscription-engine.ts, other files needed to be excluded from the repository:
+
+- Condition.ts
+- consumer.ts
+- Event.ts
+- Notification.ts
+- simple-tools.ts
+- Subscription.ts
+
+All their tests were removed too.
