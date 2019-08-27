@@ -6,7 +6,7 @@ import crypto = require("crypto");
 import fs = require("fs");
 import redis = require("redis");
 
-const TAG = { filename:  "redis-client" };
+const TAG = { filename: "RedisClient" };
 
 export interface IAssignedScheme {
   replica_assigment: {
@@ -38,10 +38,10 @@ class ClientWrapper {
    */
   public getConfig(subject: string): Promise<ITopicProfile | undefined> {
     return new Promise<ITopicProfile | undefined>((resolve, reject) => {
+      logger.debug("Retrieving Redis config", TAG);
       this.client.select(1);
       logger.debug(`subject: ${subject}`, TAG);
       const pattern: string = "*:" + subject;
-      // let cursor: string = '0';
       let keys: any = [];
       const configs: ITopicProfile = {};
 
@@ -56,6 +56,7 @@ class ClientWrapper {
 
         const insertConfig = (key: any, err: any, reply: any) => {
           if (err) {
+            logger.error(`Error while inserting configuration: ${err}`, TAG);
             reject(err);
             return;
           }
@@ -132,6 +133,7 @@ class ClientWrapper {
 
     const evalshaCallback = (err: any, data: any) => {
       if (err) {
+        logger.error(`Error while trying to execute the script: ${err}`, TAG);
         callback(err, undefined);
       } else {
         callback(undefined, data);
@@ -140,6 +142,7 @@ class ClientWrapper {
 
     const evalOrLoadCallback = (err: any, data: any) => {
       if (err) {
+        logger.debug(`Error while trying to run the script: ${err}`, TAG);
         if (err.code === "NOSCRIPT") {
           this.client.script("load", script, () => {
             if (vals && (vals.length > 0)) {

@@ -13,7 +13,7 @@ import { RedisManager } from "./redisManager";
 import { SocketIOSingleton } from "./socketIo";
 import { TopicManagerBuilder } from "./TopicBuilder";
 
-const TAG = { filename: "sub-mng" };
+const TAG = { filename: "SubscriptionManager" };
 
 class DataBroker {
   private app: express.Application;
@@ -78,42 +78,46 @@ class DataBroker {
      * Topic registry endpoints
      */
     this.app.get("/topic/:subject", (req: IAuthRequest, response: express.Response) => {
-      logger.debug("Received a topic GET request.", TAG);
+      logger.debug(`Received a GET request in /topic/${req.params.subject}.`, TAG);
+
       if (req.service === undefined) {
         logger.error("Service is not defined in GET request headers.", TAG);
         response.status(401);
-        response.send({ error: "missing mandatory authorization header in get request" });
+        response.send({ error: "Missing service in GET request header" });
       } else {
         const topics = TopicManagerBuilder.get(req.service);
         logger.debug(`Topic for service ${req.service} and subject ${req.params.subject}.`, TAG);
         topics.getCreateTopic(req.params.subject, (error: any, data: any) => {
           if (error) {
-            logger.error(`Failed to retrieve topic. Error is ${error}`, TAG);
+            logger.error(`Failed to process topic. Error is ${error}`, TAG);
             response.status(500);
-            response.send({ error: "failed to process topic" });
+            response.send({ error: "Failed to process topic" });
           } else {
             response.status(200).send({ topic: data });
           }
         });
       }
     });
+
     /**
      * Getting profiles end point
      */
     this.app.get("/topic/:subject/profile", (req: IAuthRequest, response: express.Response) => {
-
-      logger.debug("Received a profile GET request.", TAG);
+      logger.debug(`Received a GET request in /topic/${req.params.subject}/profile.`, TAG);
 
       if (req.service === undefined) {
-        response.status(401).send({ error: "Missing mandatory authorization header in profile request" });
+        logger.error("Service is not defined in GET request headers.", TAG);
+        response.status(401).send({ error: "Missing service in GET request header" });
       } else {
         const topics = TopicManagerBuilder.get(req.service);
         topics.getConfigTopics(req.params.subject).then((data: ITopicProfile | undefined) => {
           if (data === undefined) {
+            logger.debug("Could not find profiles for this subject", TAG);
             response.status(404).send({ message: "Could not find profiles for this subject" });
           }
           response.status(200).send(data);
         }).catch((error: any) => {
+          logger.error(`Could not proccess the request. Error: ${error}`, TAG);
           response.status(500).send({ message: "error", details: `${util.inspect(error, { depth: null })}` });
         });
       }
@@ -124,25 +128,27 @@ class DataBroker {
      * Setting profiles end point
      */
     this.app.post("/topic/:subject/profile", (req: IAuthRequest, response: express.Response) => {
-      logger.debug("Received a profile POST request.", TAG);
+      logger.debug(`Received a POST request in /topic/${req.params.subject}/profile.`, TAG);
       if (req.service === undefined) {
-        response.status(401).send({ error: "Missing mandatory authorization header in profile request" });
+        logger.error("Service is not defined in POST request headers.", TAG);
+        response.status(401).send({ error: "Missing service in POST request header" });
       } else {
         const topics = TopicManagerBuilder.get(req.service);
         topics.setConfigTopics(req.params.subject, req.body);
       }
 
-      response.status(200).send({ message: "Set configs successfully" });
+      response.status(200).send({ message: "Configs set successfully" });
     });
 
     /**
      * Editing profiles end point
      */
     this.app.put("/topic/:subject/profile/:tenant", (req: IAuthRequest, response: express.Response) => {
-      logger.debug(`Received a profile PUT request for tenant ${req.params.tenant}`, TAG);
+      logger.debug(`Received a PUT request in /topic/${req.params.subject}/profile/${req.params.tenant}`, TAG);
 
       if (req.service === undefined) {
-        response.status(401).send({ error: "Missing mandatory authorization header in profile request" });
+        logger.error("Service is not defined in PUT request headers.", TAG);
+        response.status(401).send({ error: "Missing service in PUT request header" });
       } else {
         const topics = TopicManagerBuilder.get(req.service);
         topics.setConfigTopics(req.params.subject, req.body);
@@ -158,11 +164,11 @@ class DataBroker {
      * SocketIO endpoint
      */
     this.app.get("/socketio", (req: IAuthRequest, response: express.Response) => {
-      logger.debug("Received a request for a new socketIO connection.", TAG);
+      logger.debug("Received a request for a new socketIO connection in /socketio.", TAG);
       if (req.service === undefined) {
         logger.error("Service is not defined in SocketIO connection request headers.", TAG);
         response.status(401);
-        response.send({ error: "missing mandatory authorization header in socketio request" });
+        response.send({ error: "Missing service in GET request header" });
       } else {
         const token = SocketIOSingleton.getInstance().getToken(req.service);
         response.status(200).send({ token });

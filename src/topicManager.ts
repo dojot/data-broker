@@ -9,7 +9,7 @@ import { QueuedTopic } from "./QueuedTopic";
 import { ClientWrapper, IAutoScheme } from "./RedisClientWrapper";
 import { RedisManager } from "./redisManager";
 
-const TAG = {filename: "topicManager"};
+const TAG = { filename: "TopicManager" };
 
 type TopicCallback = (error?: any, topic?: string) => void;
 

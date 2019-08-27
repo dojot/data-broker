@@ -1,10 +1,14 @@
 import { Messenger } from "@dojot/dojot-module";
+import { logger } from "@dojot/dojot-module-logger";
 import { DataTrigger, getHTTPRouter, HealthChecker, IComponentDetails, IServiceInfo } from "@dojot/healthcheck";
 import { Router } from "express";
 import * as os from "os";
 import { RedisClient } from "redis";
 import pjson from "../package.json";
 import * as config from "./config";
+
+const TAG = { filename: "HealthCheck" };
+
 /**
  * Healthcheck agent for IoT agent MQTT.
  *
@@ -25,10 +29,13 @@ class AgentHealthChecker {
     };
 
     this.healthChecker = new HealthChecker(configHealth);
+    logger.debug("Initializing HTTP Router...", TAG);
     this.router = getHTTPRouter(this.healthChecker);
+    logger.debug("... HTTP Router initialized", TAG);
     this.kafkaMessenger = kafkaMessenger;
     this.redisClient = redisClient;
   }
+
   /**
    * Register all monitors
    */
@@ -55,6 +62,7 @@ class AgentHealthChecker {
       return value;
     };
 
+    logger.debug("Registering uptime monitor", TAG);
     this.healthChecker.registerMonitor(uptime, collectUptime,
       config.healthcheck.timeout.uptime);
   }
@@ -80,6 +88,7 @@ class AgentHealthChecker {
       return pmem;
     };
 
+    logger.debug("Registering memory monitor", TAG);
     this.healthChecker.registerMonitor(memory, collectMemory,
       config.healthcheck.timeout.memory);
   }
@@ -105,6 +114,7 @@ class AgentHealthChecker {
       return pcpu;
     };
 
+    logger.debug("Registering CPU monitor", TAG);
     this.healthChecker.registerMonitor(cpu, collectCpu,
       config.healthcheck.timeout.cpu);
   }
@@ -118,12 +128,15 @@ class AgentHealthChecker {
       status: "pass",
     };
 
+    logger.debug("Registering Redis monitor", TAG);
     const dataTrigger = this.healthChecker.registerMonitor(redisInfo);
     this.redisClient.on("ready", () => {
+      logger.debug("Redis server connected", TAG);
       dataTrigger.trigger(true, "pass");
     });
 
     this.redisClient.on("end", () => {
+      logger.debug("Redis server connection has closed", TAG);
       dataTrigger.trigger(false, "fail");
     });
   }
@@ -139,7 +152,8 @@ class AgentHealthChecker {
       (this.kafkaMessenger as any).consumer.consumer.getMetadata({ timeout: 3000 },
         (error: any, metadata: any) => {
           if (error) {
-            reject(new Error("Internal error while getting kafka metadata."));
+            logger.error(`Kafka has errored while getting metadata: ${error}`, TAG);
+            reject(error);
           } else {
             kafkaStatus.connected = true;
             kafkaStatus.details = {
@@ -171,6 +185,7 @@ class AgentHealthChecker {
       });
     };
 
+    logger.debug("Registering Kafka monitor", TAG);
     this.healthChecker.registerMonitor(kafka, collectKafkaState,
       config.healthcheck.timeout.kafka);
 
