@@ -6,7 +6,7 @@ ignore:
     - '@dojot/adminkafka > node-gyp > tar > fstream':
         reason: The adminkafka library will be removed
         expires: '2019-09-21T11:34:51.388Z'
-      '@dojot/adminkafka > node-gyp > fstream':
+    - '@dojot/adminkafka > node-gyp > fstream':
         reason: The adminkafka library will be removed soon
         expires: '2019-09-21T12:20:21.450Z'
   SNYK-JS-TAR-174125:
