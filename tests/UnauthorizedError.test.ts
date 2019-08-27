@@ -1,4 +1,4 @@
-import { UnauthorizedError } from "../src/api/UnauthorizedError"
+import { UnauthorizedError } from "../src/api/UnauthorizedError";
 
 describe("InvalidTokenError", () => {
   it("should build a valid instance", () => {
