@@ -1,36 +1,33 @@
 FORMAT: 1A
 HOST: http://localhost:80
 
-# Dojot data broker API
+# Data Broker API
 
-This document describes the APIs using data-broker as a standalone process. If
-used within dojot, the endpoints might be changed a bit. Check [dojot's
-documentation](http://dojotdocs.readthedocs.io/) to check all of them.
+This document describes the APIs using Data Broker as a standalone process. If used within dojot,
+the endpoints might be changed a bit. Check
+[Dojot's documentation](http://dojotdocs.readthedocs.io/) for more details.
 
 # Group Subject
 
-In order to allow clients to consume dojot events on their own pace, dojot
-exposes (both internally and externally) apache kafka streams. To manage the
-set of topics exposed by the kafka cluster, the data-broker
-component functions as a gatekeeper to the queues, configuring the needed
-streams on kafka and setting its accessibility parameters.
+In order to allow clients to consume Dojot events on their own pace, Dojot exposes (both internally
+and externally) Apache Kafka streams. To manage the set of topics exposed by the Kafka cluster, Data
+Broker functions as a gatekeeper to the queues, configuring the needed streams on Kafka and setting
+its accessibility parameters.
 
-In order to *subscribe* to a given set of events, a client uses a `subject`. A
-`subject` is a shared human-readable identifier for the data stream one wishes
-to produce or consume from. From the data-broker point of view, all `subjects`
-are equal and are just a representation of a set of events to be put on their
-own stream. To check the list of available subjects to consume from (as an
-application) please check the relevant service documentation (e.g.
-*device-manager* or *iotagent*).
+In order to *subscribe* to a given set of events, a client uses a `subject`. A `subject` is a shared
+human-readable identifier for the data stream one wishes to produce or consume from. From the Data
+Broker point of view, all `subjects` are equal and are just a representation of a set of events to
+be put on their own stream. To check the list of available subjects to consume from (as an
+application) please check the relevant service documentation (e.g. *device-manager* or *iotagent*).
 
 ## Subject [/topic/{subjectid}]
 
 + Parameters
     + subjectid: device%2Ddata (required, string) - Subject whose topic is to be retrieved.
 
-### Request kafka topic for given subject [GET]
+### Request Kafka topic for given subject [GET]
 
-Request a kafka topic ID for realtime event consumption
+Request a Kafka topic for realtime event consumption.
 
 + Request
     + Headers
@@ -39,33 +36,33 @@ Request a kafka topic ID for realtime event consumption
 
 + Response 200 (application/json; charset=utf-8)
 
-            {"topic":"c9b2c688-9e40-4032-877a-3d262acba9d0"}
+            {"topic":"admin.device-data"}
 
 + Response 401 (application/json; charset=utf-8)
 
-            {"error": "missing mandatory authorization header in get request"}
+            {"error":"Authentication (JWT) required for API"}
 
 + Response 500 (application/json; charset=utf-8)
 
-            {"error": "failed to process topic"}
+            {"error":"Failed to process topic"}
 
 
 # Group Websockets
 
-For websocket based real time consumption of events, a two-step procedure is required on the
-client. First, the user requests a session token, using a valid dojot JWT token to present itself
-to the platform. Should the user be able to access the feature, data-broker will then generate a
-one-time token to be used by the client when establising the websocket connection, through a
-querystring param.
+For Websocket-based realtime consumption of events, a two-step procedure is required on the client.
+First, the user requests a session token, using a valid Dojot JWT token to present itself to the
+platform. Should the user be able to access the feature, Data Broker will then generate a one-time
+token to be used by the client when establising the Websocket connection, through a query string
+parameter.
 
 Websocket connections that do not present a valid previously agreed one-time token will be dropped.
 
-## Socket-io based realtime events [/socketio]
+## SocketIO-based realtime events [/socketio]
 
 Established connections will have two types of events defined: wildcard (`all`) and per device.
 
 As a client, to be notified of changes to a specific device's attribute values, subscribe to the
-device id of the relevant device:
+device ID of the relevant device:
 
 ```javascript
 /*
@@ -75,7 +72,7 @@ device id of the relevant device:
  */
 var socket = socketio(target, {'query': "token=" + token, 'transports': ['websocket']});
 socket.on('{deviceidhere}', (data) => {
-    // handle data here
+  // handle data here
 });
 ```
 
@@ -89,23 +86,22 @@ To be notified of changes to any device, subscribe to the wildcard message type 
  */
 var socket = socketio(target, {'query': "token=" + token, 'transports': ['websocket']});
 socket.on('all', (data) => {
-    // handle data here
+  // handle data here
 });
 ```
 
-All messages received through ```device-data``` and ```dojot.notification```
-subjects will be redirected to Socket-io. To check their format and content,
-check [iotagent-mosca documentation](http://dojotdocs.readthedocs.io/projects/iotagent-mosca/en/latest/operation.html#sending-messages-to-other-components-via-kafka).
+All messages received through `device-data` and `dojot.notification` subjects will be
+redirected to SocketIO. To check their format and content, check
+[iotagent-mosca documentation](http://dojotdocs.readthedocs.io/projects/iotagent-mosca/en/latest/operation.html#sending-messages-to-other-components-via-kafka).
 
 In order to receive data selectively, the following events can be subscribed:
 
-- ```all```: all device events from a particular tenant
+- `all`: all device events from a particular tenant
 - `device-id`: only events for that particular device.
-- ```notifications```: only notifications are going to be sent. You can sent
-  back to data-broker filters. In order to receive notifications using a socket
-  io connection, a ```subject=dojot.notifications``` parameter should be added to the query string
-  used to create the socket.io connection.
-
+- `notifications`: only notifications are going to be sent. You can send back to Data Broker
+  filters. In order to receive notifications using a SocketIO connection, a
+  `subject=dojot.notifications` parameter should be added to the query string used to create the
+  SocketIO connection.
 
 
 ### Request authentication token [GET]
@@ -123,7 +119,7 @@ Request a one-time token for connection establishment.
 
 + Response 401 (application/json; charset=utf-8)
 
-            {"error": "missing mandatory authorization header in socketio request"}
+            {"error":"Authentication (JWT) required for API"}
 
 
 # Group Log configuration
@@ -159,4 +155,16 @@ Retrieve/request log level changes
 
             "Level of debugger is set to warn"
 
++ Request
+    + Headers
 
+            Authorization: Bearer JWT
+
+    + Body
+
+            {
+                "level": "notalevel"
+            }
++ Response 400 (text/html; charset=utf-8)
+
+            "undefined level of debugger"
