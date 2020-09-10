@@ -5,11 +5,11 @@ HOST: http://localhost:80
 
 This document describes the APIs using Data Broker as a standalone process. If used within dojot,
 the endpoints might be changed a bit. Check
-[Dojot's documentation](http://dojotdocs.readthedocs.io/) for more details.
+[dojot's documentation](http://dojotdocs.readthedocs.io/) for more details.
 
 # Group Subject
 
-In order to allow clients to consume Dojot events on their own pace, Dojot exposes (both internally
+In order to allow clients to consume dojot events on their own pace, dojot exposes (both internally
 and externally) Apache Kafka streams. To manage the set of topics exposed by the Kafka cluster, Data
 Broker functions as a gatekeeper to the queues, configuring the needed streams on Kafka and setting
 its accessibility parameters.
@@ -50,7 +50,7 @@ Request a Kafka topic for realtime event consumption.
 # Group Websockets
 
 For Websocket-based realtime consumption of events, a two-step procedure is required on the client.
-First, the user requests a session token, using a valid Dojot JWT token to present itself to the
+First, the user requests a session token, using a valid dojot JWT token to present itself to the
 platform. Should the user be able to access the feature, Data Broker will then generate a one-time
 token to be used by the client when establising the Websocket connection, through a query string
 parameter.

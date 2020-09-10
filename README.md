@@ -5,13 +5,13 @@
 [![Build Status](https://travis-ci.org/dojot/data-broker.svg?branch=development)](https://travis-ci.org/dojot/data-broker)
 [![codecov](https://codecov.io/gh/dojot/data-broker/branch/development/graph/badge.svg)](https://codecov.io/gh/dojot/data-broker)
 
-This repository contains the implementation for the event broker used internally by Dojot's event
+This repository contains the implementation for the event broker used internally by dojot's event
 processing services.
 
 # What it does
 
 Data Broker provides two services: Kafka's topic management and real-time data. These are required
-by most of the services that compose Dojot, being essential to maintain the system working.
+by most of the services that compose dojot, being essential to maintain the system working.
 
 The topic management service handles Kafka's topics, used for information dissemination (e.g.
 device creation events), handling the creation of runtime Kafka topics that segregate information
@@ -28,9 +28,9 @@ configured topics is that, by default, they are single-partitioned without repli
 be changed by using endpoints. Check Data Broker's
 [API reference](https://dojot.github.io/data-broker/apiary_v0.3.0.html) for more information.
 
-# Dojot dependencies
+# dojot dependencies
 
-Data Broker depends on some Dojot modules to run. The minimum set of modules it needs to run is:
+Data Broker depends on some dojot modules to run. The minimum set of modules it needs to run is:
 
 - Auth
 - Kafka
@@ -54,7 +54,7 @@ KAFKA_REPLICATION_FACTOR | Default replication factor in Kafka topics   | 1
 LOG_LEVEL                | Logger level (error, warn, info, debug)      | "info"
 SERVICE_PORT             | Data Broker service port                     | 80
 
-Some environment variables are used by Dojot libraries that Data Broker uses.
+Some environment variables are used by dojot libraries that Data Broker uses.
 
 Key                        | Purpose                                                     | Default Value
 -------------------------- | ----------------------------------------------------------- | -----------------------------
@@ -72,8 +72,8 @@ KAFKA_HOSTS                | List of Kafka instances                            
 
 # How to run
 
-Beforehand, you need an already running Dojot instance in your machine. See
-[Dojot documentation](https://dojotdocs.readthedocs.io/en/stable/) for more information on
+Beforehand, you need an already running dojot instance in your machine. See
+[dojot documentation](https://dojotdocs.readthedocs.io/en/stable/) for more information on
 installation methods.
 
 Generate a Docker image:
@@ -83,13 +83,13 @@ docker build -t <username>/data-broker:<tag> -f docker/Dockerfile .
 ```
 
 Then an image tagged as `<username>/data-broker:<tag>` will be made available. You can send it to
-your DockerHub registry to made it available for non-local Dojot installations:
+your DockerHub registry to made it available for non-local dojot installations:
 
 ```shell
 docker push <username>/data-broker:<tag>
 ```
 
-__NOTE THAT__ an official image is provided at Dojot's
+__NOTE THAT__ an official image is provided at dojot's
 [DockerHub](https://hub.docker.com/r/dojot/data-broker/).
 
 # Documentation
@@ -105,4 +105,4 @@ of use. As a consequence, the endpoint `/subscription` has being removed.
 # Issues and help
 
 If you found a problem or need help, leave an issue in the main
-[Dojot repository](https://github.com/dojot/dojot) and we will help you!
+[dojot repository](https://github.com/dojot/dojot) and we will help you!
