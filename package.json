@@ -24,7 +24,9 @@
     "copy": "[ ! -d build/src/lua ] && mkdir -p build/src/lua ; cp -r src/lua/* build/src/lua",
     "build": "tsc && npm run-script copy",
     "build-tests": "tsc -p tests/tsconfig.json && npm run-script copy",
-    "test": "jest --coverage ./tests/*"
+    "test": "jest --coverage ./tests/*",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@dojot/adminkafka": "0.0.1-alpha.9",
@@ -40,9 +42,9 @@
     "@types/uuid": "^3.4.3",
     "@types/winston": "^2.3.9",
     "async": "^2.6.2",
-    "axios": "^0.17.1",
+    "axios": "^0.18.1",
     "body-parser": "^1.18.2",
-    "eslint": "^4.7.2",
+    "eslint": "^5.0.0",
     "express": "^4.16.0",
     "jest": "^23.6.0",
     "jshint": "^2.10.2",
@@ -53,7 +55,8 @@
     "tsconfig": "^7.0.0",
     "typescript": "~3.0.3",
     "uuid": "^3.1.0",
-    "winston": "~3.0.0"
+    "winston": "~3.0.0",
+    "snyk": "^1.413.3"
   },
   "devDependencies": {
     "@types/argparse": "^1.0.36",
@@ -90,5 +93,6 @@
         "tsConfig": "./tests/tsconfig.json"
       }
     }
-  }
+  },
+  "snyk": true
 }
