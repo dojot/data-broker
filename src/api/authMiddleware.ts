@@ -47,18 +47,25 @@ function authParse(req: IAuthRequest, res: express.Response, next: express.NextF
 
   req.user = tokenData.username;
   req.userid = tokenData.userid;
-  req.service = tokenData.service;
+
+  // thus less internal changes are required
+  // and ensures compatibility with external calls
+  if (tokenData.service) {
+    req.service = tokenData.service;
+  } else if (tokenData.iss) {
+    req.service = tokenData.iss.substring(tokenData.iss.lastIndexOf('/') + 1);
+  }
   next();
 }
 
 function authEnforce(req: IAuthRequest, res: express.Response, next: express.NextFunction) {
-  if (req.user === undefined || req.user!.trim() === "" ) {
+  if (req.user === undefined || req.user!.trim() === "") {
     // valid token must be supplied
     logger.error("Got invalid request: user is not defined in token.", TAG);
     logger.error(`Token is: ${req.header("authorization")}`, TAG);
     res.status(401);
     res.send(new UnauthorizedError());
-  } else if (req.service === undefined || req.service!.trim() === "" ) {
+  } else if (req.service === undefined || req.service!.trim() === "") {
     // valid token must be supplied
     logger.error("Got invalid request: service is not defined in token.", TAG);
     logger.error(`Token is: ${req.header("authorization")}`, TAG);
