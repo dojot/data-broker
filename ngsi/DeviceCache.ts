@@ -2,7 +2,7 @@
 "use strict";
 
 import { logger } from "@dojot/dojot-module-logger";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, {AxiosError, AxiosResponse} from "axios";
 import util = require("util");
 import * as device from "./deviceManager";
 
@@ -12,12 +12,12 @@ type DeviceRequestCallback = (err: any, data: device.IDevice | undefined) => voi
 
 function generateJWT(service: string) {
   return (new Buffer("dummy jwt schema").toString("base64")) + "."
-    + (new Buffer(JSON.stringify({ service })).toString("base64")) + "."
-    + (new Buffer("dummy signature").toString("base64"));
+         + (new Buffer(JSON.stringify({service})).toString("base64")) + "."
+         + (new Buffer("dummy signature").toString("base64"));
 }
 
 class DeviceCache {
-  private deviceInfo: { [id: string]: device.IDevice };
+  private deviceInfo: {[id: string]: device.IDevice};
   private deviceManager: string;
 
   constructor(deviceManager: string) {
@@ -38,21 +38,21 @@ class DeviceCache {
   private requestDeviceInfo(service: string, deviceId: string, cb: DeviceRequestCallback): void {
     logger.debug("Retrieving device info from DeviceManager...", TAG);
     axios({
-      headers: { authorization: "Bearer " + generateJWT(service) },
+      headers: {authorization: "Bearer " + generateJWT(service)},
       method: "get",
       url: this.deviceManager + "/device/" + deviceId,
     })
-      .then((response: AxiosResponse) => {
-        logger.debug("... device info was retrieved.", TAG);
-        logger.debug(`Data is: ${util.inspect(response.data, { depth: null })}`, TAG);
-        this.deviceInfo[this.parseKey(service, deviceId)] = response.data;
-        cb(null, response.data);
-      })
-      .catch((error: AxiosError) => {
-        logger.debug("... device info was not retrieved.", TAG);
-        logger.error(`Error is: ${error}`, TAG);
-        cb(error, undefined);
-      });
+    .then((response: AxiosResponse) => {
+      logger.debug("... device info was retrieved.", TAG);
+      logger.debug(`Data is: ${util.inspect(response.data, {depth: null})}`, TAG);
+      this.deviceInfo[this.parseKey(service, deviceId)] = response.data;
+      cb(null, response.data);
+    })
+    .catch((error: AxiosError) => {
+      logger.debug("... device info was not retrieved.", TAG);
+      logger.error(`Error is: ${error}`, TAG);
+      cb(error, undefined);
+    });
     logger.debug("... request for DeviceManager was sent.", TAG);
   }
 
