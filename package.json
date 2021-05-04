@@ -1,7 +1,7 @@
 {
   "name": "data-broker",
   "description": "Device event broker service for usage with dojot",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/dojot/data-broker",
   "keywords": [
     "kafka",
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@dojot/adminkafka": "0.2.0",
-    "@dojot/dojot-module": "0.1.1",
+    "@dojot/dojot-module": "^0.2.0",
     "@dojot/dojot-module-logger": "0.1.0",
     "@dojot/healthcheck": "^0.1.0",
     "@types/body-parser": "^1.16.5",
