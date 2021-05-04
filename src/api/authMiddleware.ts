@@ -48,8 +48,7 @@ function authParse(req: IAuthRequest, res: express.Response, next: express.NextF
   req.user = tokenData.username;
   req.userid = tokenData.userid;
 
-  // thus less internal changes are required
-  // and ensures compatibility with external calls
+  // to ensure backward compatibility
   if (tokenData.service) {
     req.service = tokenData.service;
   } else if (tokenData.iss) {
