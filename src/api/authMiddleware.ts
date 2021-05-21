@@ -44,7 +44,7 @@ function authParse(req: IAuthRequest, res: express.Response, next: express.NextF
 
   const tokenData = JSON.parse(b64decode(token[1]));
 
-
+   // to ensure backward compatibility
   if (tokenData.username) {
     req.user = tokenData.username;
   } else if (tokenData.preferred_username) {
