@@ -22,7 +22,7 @@ function initExpressApp() {
   });
 
   app.get("/admin/realms", (req, res) => {
-    res.json([{ id: 'admin' }, { id: 'master' }]);
+    res.json([{ realm: 'admin' }, { realm: 'master' }]);
   });
 
   app.post("/realms/master/protocol/openid-connect/token", (req, res) => {
