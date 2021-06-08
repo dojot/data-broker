@@ -1,7 +1,7 @@
 {
   "name": "data-broker",
   "description": "Device event broker service for usage with dojot",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "homepage": "https://github.com/dojot/data-broker",
   "keywords": [
     "kafka",
