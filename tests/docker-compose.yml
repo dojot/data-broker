@@ -3,6 +3,8 @@ services:
 
   data-broker:
     image: dredd-tests
+    environment:
+      LOG_LEVEL: 'debug'
     depends_on:
       - kafka
       - data-broker-redis

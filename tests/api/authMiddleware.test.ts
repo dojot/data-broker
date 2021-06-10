@@ -14,7 +14,6 @@ import "jest";
 
 /* Attributes of the token:
  * user: admin
- * userid: 1
  * service: admin
  */
 const jwt = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.\
@@ -66,9 +65,6 @@ describe("authMiddleware", () => {
     if (req.hasOwnProperty("user")) {
       delete req.user;
     }
-    if (req.hasOwnProperty("userid")) {
-      delete req.userid;
-    }
     if (req.hasOwnProperty("service")) {
       delete req.service;
     }
@@ -95,7 +91,6 @@ describe("authMiddleware", () => {
       authParse(req, res, mockConfig.express.next);
 
       expect(req.user).toEqual("admin");
-      expect(req.userid).toEqual(1);
       expect(req.service).toEqual("admin");
 
       expect(spyHeader).toHaveBeenCalled();
@@ -110,7 +105,6 @@ describe("authMiddleware", () => {
       authParse(req, res, mockConfig.express.next);
 
       expect(req.user).toBeUndefined();
-      expect(req.userid).toBeUndefined();
       expect(req.service).toBeUndefined();
 
       expect(mockConfig.express.next).toHaveBeenCalled();
@@ -126,7 +120,6 @@ describe("authMiddleware", () => {
       expect(mockConfig.express.next).not.toHaveBeenCalled();
 
       expect(req.user).toBeUndefined();
-      expect(req.userid).toBeUndefined();
       expect(req.service).toBeUndefined();
     });
   });

@@ -23,7 +23,6 @@ function b64decode(data: string): string {
  */
 interface IAuthRequest extends express.Request {
   user?: string;
-  userid?: string;
   service?: string;
 }
 
@@ -45,20 +44,25 @@ function authParse(req: IAuthRequest, res: express.Response, next: express.NextF
 
   const tokenData = JSON.parse(b64decode(token[1]));
 
-  req.user = tokenData.username;
-  req.userid = tokenData.userid;
-  req.service = tokenData.service;
+   // to ensure backward compatibility
+  if (tokenData.username) {
+    req.user = tokenData.username;
+  } else if (tokenData.preferred_username) {
+    req.user = tokenData.preferred_username;
+  }
+
+  // to ensure backward compatibility
+  if (tokenData.service) {
+    req.service = tokenData.service;
+  } else if (tokenData.iss) {
+    req.service = tokenData.iss.substring(tokenData.iss.lastIndexOf('/') + 1);
+  }
   next();
 }
 
 function authEnforce(req: IAuthRequest, res: express.Response, next: express.NextFunction) {
-  if (req.user === undefined || req.user!.trim() === "" ) {
-    // valid token must be supplied
-    logger.error("Got invalid request: user is not defined in token.", TAG);
-    logger.error(`Token is: ${req.header("authorization")}`, TAG);
-    res.status(401);
-    res.send(new UnauthorizedError());
-  } else if (req.service === undefined || req.service!.trim() === "" ) {
+
+  if (req.service === undefined || req.service!.trim() === "") {
     // valid token must be supplied
     logger.error("Got invalid request: service is not defined in token.", TAG);
     logger.error(`Token is: ${req.header("authorization")}`, TAG);

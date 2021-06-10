@@ -52,7 +52,6 @@ jobs:
 
     - name: Build the stack and test
       run: |
-        docker build -t ${GITHUB_REPOSITORY} . -f ./docker/Dockerfile
         docker build -t dredd-tests . -f ./tests/Dockerfile
         docker-compose -f ./tests/docker-compose.yml up -d kafka data-broker-redis
         docker-compose -f ./tests/docker-compose.yml run data-broker
