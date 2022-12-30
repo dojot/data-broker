@@ -69,7 +69,7 @@
     "@types/sinon": "^5.0.2",
     "@types/socket.io": "^1.4.31",
     "hooks": "^0.3.2",
-    "snyk": "^1.224.0",
+    "snyk": "^1.1064.0",
     "ts-jest": "^23.10.5",
     "jasmine-ts": "0.3.0",
     "@bbc/apache2-license-checker": "^1.1.4"
